@@ -1,7 +1,8 @@
 "use client"
 
 import { notFound } from "next/navigation"
-import { ArrowLeft, ExternalLink, Github, Zap } from "lucide-react"
+import { ArrowLeft, ExternalLink, Zap } from "lucide-react"
+import { SiGithub } from "react-icons/si"
 import Link from "next/link"
 import { PageLayout } from "@/components/page-layout"
 import { Button } from "@/components/ui/button"
@@ -63,13 +64,13 @@ export default function ProjectPageClient({ params }: ProjectPageProps) {
               {project.repoUrl ? (
                 <Button variant="outline" asChild>
                   <Link href={project.repoUrl!} target="_blank">
-                    <Github className="mr-2 h-4 w-4" />
+                    <SiGithub className="mr-2 h-4 w-4" />
                     View Source Code
                   </Link>
                 </Button>
               ) : (
                 <Button variant="outline" disabled className="cursor-not-allowed">
-                  <Github className="mr-2 h-4 w-4" />
+                  <SiGithub className="mr-2 h-4 w-4" />
                   Confidential
                 </Button>
               )}
@@ -168,13 +169,13 @@ export default function ProjectPageClient({ params }: ProjectPageProps) {
                   {project.repoUrl ? (
                     <Button variant="outline" asChild className="w-full justify-start bg-transparent">
                       <Link href={project.repoUrl!} target="_blank">
-                        <Github className="mr-2 h-4 w-4" />
+                        <SiGithub className="mr-2 h-4 w-4" />
                         Source Code
                       </Link>
                     </Button>
                   ) : (
                     <Button variant="outline" disabled className="w-full justify-start bg-transparent cursor-not-allowed">
-                      <Github className="mr-2 h-4 w-4" />
+                      <SiGithub className="mr-2 h-4 w-4" />
                       Confidential
                     </Button>
                   )}

@@ -6,16 +6,16 @@ export const profile = {
   aboutShort: "AI/ML Engineer specializing in LLM applications, computer vision, and full-stack development.",
   aboutLong:
     "Passionate Computer Science student at Kettering University with expertise in AI/ML, computer vision, and full-stack development. Currently interning at Hyundai Mobis working on LLM-based reasoning systems and ML-powered automotive applications. Winner of Hack Dearborn 2023 and experienced in developing scalable web applications and AI-powered solutions.",
-  email: "sury0896@kettering.edu",
-  resumeUrl: "/Resume_Ansh_CS.pdf",
-  avatarUrl: "/professional-headshot-of-a-young-developer.jpg",
+  email: "anshraj65@gmail.com",
+  resumeUrl: "/Ansh_Raj_Suryavanshi_Software_Engineer_Resume.pdf",
+  avatarUrl: "/ansh.jpg",
 }
 
 export const socials = [
   { name: "GitHub", url: "https://github.com/AnshLaw", icon: "Github" },
   { name: "LinkedIn", url: "https://linkedin.com/in/anshsuryavanshi", icon: "Linkedin" },
   { name: "Twitter", url: "https://twitter.com/ansh_law", icon: "Twitter" },
-  { name: "Email", url: "mailto:sury0896@kettering.edu", icon: "Mail" },
+  { name: "Email", url: "mailto:anshraj65@gmail.com", icon: "Mail" },
 ]
 
 export const skills = [
@@ -78,7 +78,7 @@ export const projects = [
       "Integrated with Google Maps API",
       "Hand gesture controls for collaboration",
     ],
-    repoUrl: "https://github.com/AnshLaw",
+    repoUrl: "https://github.com/AnshLaw/RoadEntertainment",
     liveUrl: null,
     images: [
       { src: "/modern-chat-interface-dark-theme.jpg", alt: "Entertainment System Interface" },
@@ -101,8 +101,8 @@ export const projects = [
       "Events scheduling functionality",
       "Replaced manual Google Sheets workflows",
     ],
-    repoUrl: "https://github.com/AnshLaw",
-    liveUrl: null,
+    repoUrl: "https://github.com/AnshLaw/REC-IT",
+    liveUrl: "https://kurecit.netlify.app/signin",
     images: [
       { src: "/react-components-showcase-grid.jpg", alt: "REC-IT App Interface" },
     ],
@@ -125,7 +125,7 @@ export const projects = [
       "AWS S3/Amplify integration",
     ],
     repoUrl: "https://github.com/AnshLaw",
-    liveUrl: null,
+    liveUrl: "https://transcripto.live",
     images: [
       { src: "/component-library-storybook-interface.jpg", alt: "Transcripto Interface" },
     ],
@@ -149,7 +149,7 @@ export const projects = [
       "Secure decentralized transactions",
     ],
     repoUrl: "https://github.com/AnshLaw",
-    liveUrl: null,
+    liveUrl: "https://gigsforpi.live",
     images: [
       { src: "/real-time-messaging-dashboard.jpg", alt: "Gigs for Pi Dashboard" },
     ],
@@ -221,7 +221,7 @@ export const awards = [
   {
     title: "Gigs for Pi - Featured on Pi Network GitHub",
     issuer: "Pi Network",
-    date: "2023",
+    date: "2024",
     link: "https://github.com/pi-network",
   },
 ]
@@ -230,7 +230,7 @@ export const education = [
   {
     school: "Kettering University",
     degree: "Bachelor of Science in Computer Science, Concentration in AI, Minor in Applied Mathematics",
-    period: "September 2021 - September 2025",
+    period: "October 2021 - September 2025",
     details:
       "Relevant Coursework: AI, Machine Learning, Operating Systems, Cloud Computing, Data Structures & Algorithms, Data Science, Theory of Computation, Object Oriented Programming, Statistics and Data Analysis, Information Retrieval & Data Mining, UI/UX, Cryptography, Digital Systems, Microcomputers, Cybersecurity • Activities: Facility Manager at Rec Center, Volleyball Club, VP at International Club • Honors: Dean's List 2021-2025, UPE CS & KME Math Honor Societies, Hack Dearborn 2023 Winner, $10,000 MEDC Michigan Scholar Award",
   },
