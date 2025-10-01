@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { Menu, X } from "lucide-react"
@@ -31,12 +32,15 @@ export function Navbar() {
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
-            <Link href="/" className="flex items-center space-x-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground font-bold text-sm">
-                {profile.name
-                  .split(" ")
-                  .map((n) => n[0])
-                  .join("")}
+            <Link href="/" className="flex items-center space-x-3">
+              <div className="w-8 h-8 rounded-full overflow-hidden border border-primary/20">
+                <Image
+                  src={profile.avatarUrl}
+                  alt={profile.name}
+                  width={32}
+                  height={32}
+                  className="w-full h-full object-cover"
+                />
               </div>
               <span className="font-bold text-lg">{profile.name}</span>
             </Link>

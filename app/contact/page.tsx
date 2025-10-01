@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { Mail, MapPin, Github, Send, MessageSquare, Phone, Calendar, Sparkles } from "lucide-react"
 
 const containerVariants = {
@@ -69,8 +68,8 @@ export default function ContactPage() {
     {
       icon: Mail,
       label: "Email",
-      value: "sury0896@kettering.edu",
-      href: "mailto:sury0896@kettering.edu",
+      value: "anshraj65@gmail.com",
+      href: "mailto:anshraj65@gmail.com",
       color: "text-blue-500",
     },
     {

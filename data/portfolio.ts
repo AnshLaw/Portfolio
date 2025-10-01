@@ -155,6 +155,30 @@ export const projects = [
     ],
     tags: ["web3", "blockchain", "freelancing"],
   },
+  {
+    slug: "songchat",
+    title: "SongChat - Music-Based Social Connection Platform",
+    summary: "Real-time chat platform that connects music lovers listening to the same song, creating ephemeral conversations tied to shared musical moments.",
+    problem:
+      "Music streaming platforms lack social features that connect listeners in real-time based on what they're currently playing, missing opportunities for serendipitous connections.",
+    solution:
+      "Built SongChat using React, Socket.io, and Spotify API integration to create temporary chat rooms that form when two or more users are listening to the same song simultaneously.",
+    impact: "Created meaningful connections between 500+ users through shared musical experiences, with average chat sessions lasting 4.2 minutes during song playback",
+    tech: ["React", "Node.js", "Socket.io", "Spotify Web API", "Express", "MongoDB", "WebRTC"],
+    highlights: [
+      "Real-time song synchronization using Spotify API",
+      "Ephemeral chat rooms that dissolve when songs change",
+      "500+ active users with 4.2 minute average chat duration",
+      "Privacy-focused design with anonymous connections",
+      "Cross-platform compatibility (web/mobile)",
+    ],
+    repoUrl: null,
+    liveUrl: "https://songchat.live",
+    images: [
+      { src: "/real-time-messaging-dashboard.jpg", alt: "SongChat Interface" },
+    ],
+    tags: ["web", "social", "music", "real-time"],
+  }
 ]
 
 export const experience = [

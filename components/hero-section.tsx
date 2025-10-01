@@ -3,6 +3,7 @@
 import React from "react"
 import { motion, easeInOut } from "framer-motion"
 import { ArrowRight, Download, Sparkles } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { profile } from "@/data/portfolio"
@@ -77,6 +78,33 @@ export function HeroSection() {
       {/* Main Content */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-8">
+          {/* Profile Picture */}
+          <motion.div variants={itemVariants} className="flex justify-center">
+            <div className="relative">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-primary/20 shadow-2xl"
+              >
+                <Image
+                  src={profile.avatarUrl}
+                  alt={profile.name}
+                  width={160}
+                  height={160}
+                  className="w-full h-full object-cover"
+                  priority
+                />
+              </motion.div>
+              <motion.div
+                className="absolute -bottom-2 -right-2 bg-primary rounded-full p-2"
+                animate={{ rotate: [0, 10, -10, 0] }}
+                transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
+              >
+                <Sparkles className="w-4 h-4 text-primary-foreground" />
+              </motion.div>
+            </div>
+          </motion.div>
+
           <motion.h1 variants={itemVariants} className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
             Hi, I'm <span className="text-primary">{profile.name}</span>
           </motion.h1>

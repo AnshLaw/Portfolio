@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import Image from "next/image"
 import { PageLayout } from "@/components/page-layout"
 import { SectionHeader } from "@/components/section-header"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -120,9 +121,15 @@ export default function AboutPage() {
                 <motion.div
                   variants={floatingVariants}
                   animate="animate"
-                  className="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-primary/20 to-primary/10 border-2 border-primary/20 flex items-center justify-center"
+                  className="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-primary/20 to-primary/10 border-2 border-primary/20 overflow-hidden"
                 >
-                  <User className="w-16 h-16 text-primary" />
+                  <Image
+                    src={profile.avatarUrl}
+                    alt={profile.name}
+                    width={128}
+                    height={128}
+                    className="w-full h-full object-cover"
+                  />
                 </motion.div>
                 <motion.div
                   className="absolute -top-2 -right-2"
