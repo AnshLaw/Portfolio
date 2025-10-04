@@ -173,7 +173,7 @@ export const projects = [
       "Cross-platform compatibility (web/mobile)",
     ],
     repoUrl: null,
-    liveUrl: "https://songchat.live",
+    liveUrl: "https://songchat.online",
     images: [
       { src: "/real-time-messaging-dashboard.jpg", alt: "SongChat Interface" },
     ],
