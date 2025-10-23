@@ -8,7 +8,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Mail, MapPin, Github, Send, MessageSquare, Phone, Calendar, Sparkles } from "lucide-react"
+import { Mail, MapPin, Github, Send, MessageSquare, Phone, Calendar, Sparkles, Linkedin, Twitter } from "lucide-react"
+import { profile, socials } from "@/data/portfolio"
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -64,26 +65,27 @@ export default function ContactPage() {
     console.log("Form submitted:", formData)
   }
 
+  // Get contact info from portfolio.ts
   const contactInfo = [
     {
       icon: Mail,
       label: "Email",
-      value: "anshraj65@gmail.com",
-      href: "mailto:anshraj65@gmail.com",
+      value: profile.email,
+      href: `mailto:${profile.email}`,
       color: "text-blue-500",
     },
     {
       icon: MapPin,
       label: "Location",
-      value: "Flint, MI",
+      value: profile.location,
       href: null,
       color: "text-green-500",
     },
     {
       icon: Github,
       label: "GitHub",
-      value: "github.com/AnshLaw",
-      href: "https://github.com/AnshLaw",
+      value: socials.find(s => s.name === "GitHub")?.url.replace("https://", "") || "github.com/AnshLaw",
+      href: socials.find(s => s.name === "GitHub")?.url || "https://github.com/AnshLaw",
       color: "text-purple-500",
     },
   ]
@@ -102,8 +104,8 @@ export default function ContactPage() {
           {Array.from({ length: 8 }, (_, i) => {
             // Use deterministic values based on index to avoid hydration mismatch
             const seed = i * 137.508; // Use prime number for better distribution
-            const x = (Math.sin(seed) * 0.5 + 0.5) * 1200; // Deterministic x position
-            const y = (Math.cos(seed) * 0.5 + 0.5) * 800;  // Deterministic y position
+            const x = Math.round((Math.sin(seed) * 0.5 + 0.5) * 1200 * 100) / 100; // Deterministic x position, rounded
+            const y = Math.round((Math.cos(seed) * 0.5 + 0.5) * 800 * 100) / 100;  // Deterministic y position, rounded
             const duration = 15 + (i % 3) * 7; // Deterministic duration
             const delay = (i % 2) * 5; // Deterministic delay
 

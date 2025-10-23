@@ -6,6 +6,7 @@ import { SectionHeader } from "@/components/section-header"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Briefcase, GraduationCap, Trophy, Code, Zap, Sparkles, TrendingUp } from "lucide-react"
+import { experience, projects, education } from "@/data/portfolio"
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -39,93 +40,37 @@ const floatingVariants = {
 }
 
 export default function ExperiencePage() {
-  const experiences = [
-    {
-      id: "hyundai",
-      title: "Hyundai Mobis - AI Engineering Co-op Intern",
-      company: "Hyundai Mobis",
-      location: "Plymouth, MI",
-      period: "October 2022 - June 2025",
-      type: "work",
-      icon: Briefcase,
-      achievements: [
-        "Optimized a local LLM with agentic RAG for real-time drowsiness detection warning system, integrated into the Cruden simulator to enable reasoning-based alerts and efficient edge deployment using Agno, LangChain, Ollama, and Hugging Face",
-        "Developed an ML-based Hand Gesture Detection Model for Hyundai's in-cabin system that controls fan speed and cabin temperature, showcased at CES 2023 and set for deployment in 5M+ vehicles by 2025",
-        "Developed company-wide reusable backend libraries for Math, Vector and Matrix operations, along with OpenCV, OpenGL, and Vulkan-based implementations",
-        "Designed CI/CD automation workflow pipeline for streamlining builds and running simulation tests efficiently"
-      ]
-    },
-    {
-      id: "thesis",
-      title: "Undergraduate Co-op Thesis",
-      company: "Kettering University & Hyundai Mobis",
-      location: "Flint, MI",
-      period: "2023-2024",
-      type: "academic",
-      icon: GraduationCap,
-      achievements: [
-        "Designed a scalable local LLM-based reasoning system for real-time in-cabin comfort prediction and entertainment suggestions using multi-modal sensor data",
-        "Integrated agentic Retrieval-Augmented Generation (RAG) techniques to enable on-device inference and generate actionable, context-aware recommendations",
-        "Deployed on Cruden Simulator using Python and Ollama, integrating context-aware memory and vector databases for scalable backend performance"
-      ]
-    },
-    {
-      id: "hackathon",
-      title: "Hack Dearborn 2023 Winner",
-      company: "Hack Dearborn",
-      location: "Dearborn, MI",
-      period: "October 2023",
-      type: "competition",
-      icon: Trophy,
-      achievements: [
-        "Built an ML-powered in-cabin recommendation system using trip ETA, age detection, and user genres to suggest media with 89% accuracy",
-        "Integrated with Google Maps API and hand gesture controls for collaboration tools (whiteboard & online meeting apps) and volume adjustments",
-        "Won both Automotive Track and ZF Challenge at Hack Dearborn 2023"
-      ]
-    },
-    {
-      id: "rec-it",
-      title: "REC-IT Recreation Center App",
-      company: "Kettering University",
-      location: "Flint, MI",
-      period: "2023",
-      type: "project",
-      icon: Code,
-      achievements: [
-        "Built REC-IT, a full-stack web app for Kettering University's Rec Center, adding in-app check-in, swipe-card equipment checkouts, and events scheduling",
-        "Developed using TypeScript/React + Supabase/Firebase, replacing manual Google Sheets workflows",
-        "Streamlined recreation center operations with digital solutions"
-      ]
-    },
-    {
-      id: "transcripto",
-      title: "Transcripto App",
-      company: "Kettering University",
-      location: "Flint, MI",
-      period: "2023",
-      type: "project",
-      icon: Code,
-      achievements: [
-        "Developed Transcripto, a cloud-based React application with Firebase authentication and AWS S3/Amplify integration",
-        "Enables users to upload audio/video files, generate AI-powered transcriptions, and automatically create study resources such as summaries, quizzes, and flashcards",
-        "Built to help students efficiently transcribe content and generate study materials"
-      ]
-    },
-    {
-      id: "gigs-pi",
-      title: "Gigs for Pi",
-      company: "Web3 Freelancing Platform",
-      location: "Remote",
-      period: "2023",
-      type: "project",
-      icon: Zap,
-      achievements: [
-        "Developed a Web3 freelancing platform using TypeScript and Supabase, powered by Pi cryptocurrency",
-        "Enables secure and decentralized transactions where clients post gigs and freelancers submit bids to earn and complete tasks",
-        "Achieved 20,000+ likes, 4.78/5 star rating, 37,000+ rating reviews and featured on the official Pi Network GitHub"
-      ]
-    }
-  ]
+  // Map experience data from portfolio.ts
+  const workExperiences = experience.map((exp, index) => ({
+    id: `work-${index}`,
+    title: `${exp.company} - ${exp.role}`,
+    company: exp.company,
+    location: exp.location,
+    period: `${exp.start} - ${exp.end}`,
+    type: "work" as const,
+    icon: Briefcase,
+    achievements: exp.bullets
+  }))
+
+  // Map featured projects from portfolio.ts
+  const featuredProjects = [
+    projects.find(p => p.slug === "llm-reasoning-system"),
+    projects.find(p => p.slug === "rec-it-app"),
+    projects.find(p => p.slug === "transcripto-app"),
+    projects.find(p => p.slug === "gigs-for-pi"),
+    projects.find(p => p.slug === "songchat"),
+  ].filter(Boolean).map((project, index) => ({
+    id: `project-${project!.slug}`,
+    title: project!.title,
+    company: "Personal Project",
+    location: "Remote",
+    period: "2023-2024",
+    type: "project" as const,
+    icon: Code,
+    achievements: project!.highlights
+  }))
+
+  const experiences = [...workExperiences, ...featuredProjects]
 
   const getTypeColor = (type: string) => {
     switch (type) {
@@ -161,8 +106,8 @@ export default function ExperiencePage() {
           {Array.from({ length: 10 }, (_, i) => {
             // Use deterministic values based on index to avoid hydration mismatch
             const seed = i * 137.508; // Use prime number for better distribution
-            const x = (Math.sin(seed) * 0.5 + 0.5) * 1200; // Deterministic x position
-            const y = (Math.cos(seed) * 0.5 + 0.5) * 800;  // Deterministic y position
+            const x = Math.round((Math.sin(seed) * 0.5 + 0.5) * 1200 * 100) / 100; // Deterministic x position, rounded
+            const y = Math.round((Math.cos(seed) * 0.5 + 0.5) * 800 * 100) / 100;  // Deterministic y position, rounded
             const duration = 12 + (i % 4) * 6; // Deterministic duration
             const delay = (i % 4) * 2; // Deterministic delay
 

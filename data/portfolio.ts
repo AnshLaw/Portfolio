@@ -25,7 +25,7 @@ export const skills = [
   },
   {
     category: "AI/ML & Data Science",
-    items: ["PyTorch", "TensorFlow", "Scikit-Learn", "Pandas", "Numpy", "OpenCV", "Fine-tune LLMs", "LLM Distillation", "Generative AI", "Agno", "LangChain", "LangGraph"],
+    items: ["PyTorch", "TensorFlow", "Scikit-Learn", "Pandas", "Numpy", "OpenCV", "Fine-tune LLMs", "LLM Distillation", "Generative AI", "Agno", "LangChain", "LangGraph", "Fetch.ai"],
   },
   {
     category: "Cloud & DevOps",

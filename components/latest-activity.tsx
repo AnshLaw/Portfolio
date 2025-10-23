@@ -1,39 +1,41 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Calendar, Trophy, BookOpen } from "lucide-react"
+import { Calendar, Trophy, BookOpen, Briefcase } from "lucide-react"
 import { SiGithub} from "react-icons/si"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { SectionHeader } from "@/components/section-header"
+import { awards, experience, projects } from "@/data/portfolio"
 
+// Generate activities from portfolio.ts data
 const activities = [
   {
     icon: Trophy,
-    title: "Won Hack Dearborn 2023",
-    description: "Automotive Track Winner for developing an ML-powered vehicle entertainment system + Solving ZF's ML problem statement",
-    date: "Oct 2023",
+    title: awards.find(a => a.title.includes("Hack Dearborn"))?.title || "Won Hack Dearborn 2023",
+    description: "Automotive Track Winner + ZF Challenge for developing an ML-powered vehicle entertainment system",
+    date: awards.find(a => a.title.includes("Hack Dearborn"))?.date || "Oct 2023",
     type: "achievement",
   },
   {
     icon: SiGithub,
-    title: "Deployed Pool Hours Notifier",
-    description: "Deployed Pool hours notification system used by 1000+ students at Kettering University",
-    date: "Jan 2025",
+    title: projects.find(p => p.slug === "gigs-for-pi")?.highlights.find(h => h.includes("GitHub")) || "Featured on Pi Network GitHub",
+    description: "Gigs for Pi platform achieved 20,000+ likes and featured on official Pi Network GitHub",
+    date: awards.find(a => a.title.includes("Gigs for Pi"))?.date || "2024",
     type: "contribution",
   },
   {
     icon: BookOpen,
-    title: "Published Thesis",
-    description: '"AI powered Driver Comfort System + Passenger Entertainment System" in collaboration with Hyundai Mobis and Kettering University',
-    date: "In progress",
+    title: projects.find(p => p.slug === "llm-reasoning-system")?.title || "Undergraduate Co-op Thesis",
+    description: "LLM-based In-Cabin Comfort System in collaboration with Hyundai Mobis and Kettering University",
+    date: "2024",
     type: "writing",
   },
   {
-    icon: Calendar,
-    title: "Completed 5 co-ops",
-    description: "AI/ML Engineering Intern at Hyundai Mobis",
-    date: "Jun 2025",
+    icon: Briefcase,
+    title: `Completed AI/ML Engineering Co-op`,
+    description: `${experience[0]?.company || "Hyundai Mobis"} - Working on cutting-edge automotive AI systems`,
+    date: experience[0]?.end || "Jun 2025",
     type: "experience",
   },
 ]

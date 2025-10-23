@@ -32,15 +32,25 @@ const itemVariants = {
 }
 
 export function HeroSection() {
-  const [particlePositions, setParticlePositions] = React.useState<{x: number, y: number, duration: number}[]>([]);
+  const [particlePositions, setParticlePositions] = React.useState<{x: number, y: number, targetX: number, targetY: number, duration: number}[]>([]);
 
   React.useEffect(() => {
     if (typeof window !== "undefined") {
-      const positions = Array.from({ length: 20 }).map(() => ({
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-        duration: Math.random() * 10 + 10,
-      }));
+      const positions = Array.from({ length: 20 }).map((_, i) => {
+        // Use deterministic seed for reproducible random values
+        const seed1 = i * 137.508;
+        const seed2 = i * 239.117;
+        const seed3 = i * 317.234;
+        const seed4 = i * 419.876;
+        
+        return {
+          x: (Math.sin(seed1) * 0.5 + 0.5) * window.innerWidth,
+          y: (Math.cos(seed1) * 0.5 + 0.5) * window.innerHeight,
+          targetX: (Math.sin(seed2) * 0.5 + 0.5) * window.innerWidth,
+          targetY: (Math.cos(seed2) * 0.5 + 0.5) * window.innerHeight,
+          duration: 10 + ((Math.sin(seed3) * 0.5 + 0.5) * 10),
+        };
+      });
       setParticlePositions(positions);
     }
   }, []);
@@ -62,8 +72,8 @@ export function HeroSection() {
             className="absolute w-1 h-1 bg-primary/20 rounded-full"
             initial={{ x: pos.x, y: pos.y }}
             animate={{
-              y: [null, Math.random() * window.innerHeight],
-              x: [null, Math.random() * window.innerWidth],
+              y: [null, pos.targetY],
+              x: [null, pos.targetX],
             }}
             transition={{
               duration: pos.duration,

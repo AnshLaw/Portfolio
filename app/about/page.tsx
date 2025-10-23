@@ -7,7 +7,7 @@ import { SectionHeader } from "@/components/section-header"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { User, GraduationCap, Award, Users, Code, Brain, Rocket, Heart, Sparkles } from "lucide-react"
-import { profile, skills, awards } from "@/data/portfolio"
+import { profile, skills, awards, education } from "@/data/portfolio"
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -56,6 +56,32 @@ const floatingVariants = {
 
 export default function AboutPage() {
   const featuredSkills = skills.slice(0, 3).flatMap(category => category.items.slice(0, 4))
+  
+  // Extract coursework from education data
+  const courseworkText = education[0]?.details || ""
+  const courseworkMatch = courseworkText.match(/Relevant Coursework: ([^•]+)/)
+  const courseworkList = courseworkMatch 
+    ? courseworkMatch[1].split(',').map(s => s.trim())
+    : ["AI", "Machine Learning", "Operating Systems", "Cloud Computing", "Data Structures & Algorithms"]
+  
+  // Extract activities from education data
+  const activitiesMatch = courseworkText.match(/Activities: ([^•]+)/)
+  const activitiesList = activitiesMatch 
+    ? activitiesMatch[1].split(',').map(s => s.trim())
+    : ["Facility Manager at Rec Center", "Volleyball Club", "VP at International Club"]
+  
+  // Map activities to structured format
+  const activities = [
+    { title: "Facility Manager", org: "Rec Center, Kettering University", icon: "🏢" },
+    { title: "Volleyball Club", org: "Member, Kettering University", icon: "🏐" },
+    { title: "VP, International Club", org: "Kettering University", icon: "🌍" }
+  ]
+  
+  // Extract honors from education data
+  const honorsMatch = courseworkText.match(/Honors: ([^$]+)/)
+  const honorsList = honorsMatch
+    ? honorsMatch[1].split(',').map(s => s.trim())
+    : awards.map(a => a.title)
 
   return (
     <PageLayout>
@@ -72,8 +98,8 @@ export default function AboutPage() {
           {Array.from({ length: 12 }, (_, i) => {
             // Use deterministic values based on index to avoid hydration mismatch
             const seed = i * 137.508; // Use prime number for better distribution
-            const x = (Math.sin(seed) * 0.5 + 0.5) * 1200; // Deterministic x position
-            const y = (Math.cos(seed) * 0.5 + 0.5) * 800;  // Deterministic y position
+            const x = Math.round((Math.sin(seed) * 0.5 + 0.5) * 1200 * 100) / 100; // Deterministic x position, rounded
+            const y = Math.round((Math.cos(seed) * 0.5 + 0.5) * 800 * 100) / 100;  // Deterministic y position, rounded
             const duration = 15 + (i % 5) * 5; // Deterministic duration
             const delay = (i % 3) * 3; // Deterministic delay
 
@@ -142,10 +168,7 @@ export default function AboutPage() {
 
               <div className="prose prose-lg max-w-4xl mx-auto text-center">
                 <p className="text-xl text-muted-foreground leading-relaxed">
-                  Hi, I'm <span className="text-primary font-semibold text-2xl">{profile.name}</span>, a Computer Science student at Kettering University
-                  specializing in AI and Machine Learning. I'm currently interning at Hyundai Mobis
-                  as an AI Engineering Co-op, working on cutting-edge automotive applications using
-                  LLMs and computer vision.
+                  {profile.aboutLong}
                 </p>
               </div>
             </motion.div>
@@ -211,21 +234,17 @@ export default function AboutPage() {
                 <CardContent className="space-y-4">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
                     <div>
-                      <h3 className="font-semibold text-lg">B.S. Computer Science, AI Concentration</h3>
-                      <p className="text-muted-foreground">Minor in Applied Mathematics</p>
-                      <p className="text-sm text-muted-foreground">Kettering University, Flint, MI</p>
+                      <h3 className="font-semibold text-lg">{education[0]?.degree || "B.S. Computer Science"}</h3>
+                      <p className="text-sm text-muted-foreground">{education[0]?.school || "Kettering University"}</p>
                     </div>
                     <Badge variant="secondary" className="w-fit mt-2 sm:mt-0">
-                      Sep 2021 - Sep 2025
+                      {education[0]?.period || "Oct 2021 - Sep 2025"}
                     </Badge>
                   </div>
                   <div className="pt-4 border-t">
                     <h4 className="font-medium mb-2">Relevant Coursework</h4>
                     <div className="flex flex-wrap gap-2">
-                      {[
-                        "AI", "Machine Learning", "Operating Systems", "Cloud Computing",
-                        "Data Structures & Algorithms", "Data Science", "UI/UX", "Cryptography", "Cybersecurity"
-                      ].map((course) => (
+                      {courseworkList.map((course) => (
                         <Badge key={course} variant="outline" className="text-xs">
                           {course}
                         </Badge>
@@ -252,27 +271,24 @@ export default function AboutPage() {
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {[
-                      "Winner of Hack Dearborn 2023 (Automotive & ZF Tracks)",
-                      "Dean\'s List 2021-2025",
-                      "UPE Computer Science Honor Society",
-                      "KME Math Honor Society",
-                      "$10,000 MEDC Michigan Scholar Award",
-                      "Hyundai Mobis AI Engineering Intern",
-                      "Gigs for Pi featured on Pi Network GitHub"
-                    ].map((achievement, index) => (
+                    {awards.map((a, index) => (
                       <motion.div
-                        key={achievement}
+                        key={a.title + index}
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        transition={{ delay: index * 0.1 }}
-                        className="flex items-center gap-3 p-3 rounded-lg bg-primary/5 hover:bg-primary/10 transition-colors"
+                        transition={{ delay: index * 0.06 }}
+                        className="flex items-start gap-3 p-3 rounded-lg bg-primary/5 hover:bg-primary/10 transition-colors"
                       >
-                        <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/20">
+                        <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/20 mt-1">
                           <Award className="h-3 w-3 text-primary" />
                         </div>
-                        <span className="text-sm font-medium">{achievement}</span>
+                        <div className="flex flex-col">
+                          <span className="text-sm font-medium">{a.title}</span>
+                          {(a.issuer || a.date) && (
+                            <span className="text-xs text-muted-foreground mt-0.5">{[a.issuer, a.date].filter(Boolean).join(' • ')}</span>
+                          )}
+                        </div>
                       </motion.div>
                     ))}
                   </div>

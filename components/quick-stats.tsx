@@ -3,31 +3,33 @@
 import { motion } from "framer-motion"
 import { Code, Users, Award, Zap } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
+import { projects, awards, experience } from "@/data/portfolio"
 
+// Dynamically generate stats from portfolio data
 const stats = [
   {
     icon: Code,
-    value: "25+",
+    value: `${projects.length}+`,
     label: "Projects Built",
     description: "Full-stack applications and machine learning models",
   },
   {
     icon: Users,
-    value: "1000+",
+    value: "26K+",
     label: "Users Impacted",
-    description: "Through applications and tools I've developed",
+    description: "Through Gigs for Pi and other applications developed",
   },
   {
     icon: Award,
-    value: "1",
-    label: "Hackathon Wins",
-    description: "Including Automotive Track Winner at Hack Dearborn",
+    value: `${awards.filter(a => a.title.toLowerCase().includes('winner') || a.title.toLowerCase().includes('award')).length}+`,
+    label: "Awards & Honors",
+    description: "Including Hackathon wins and academic achievements",
   },
   {
     icon: Zap,
-    value: "∞",
-    label: "Energy Drinks",
-    description: "Powering through all-nighters and intense coding sessions",
+    value: `${experience.length}`,
+    label: "Years Experience",
+    description: "Working on cutting-edge AI/ML and full-stack projects",
   },
 ]
 

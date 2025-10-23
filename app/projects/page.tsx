@@ -61,8 +61,8 @@ export default function ProjectsPage() {
           {Array.from({ length: 15 }, (_, i) => {
             // Use deterministic values based on index to avoid hydration mismatch
             const seed = i * 137.508; // Use prime number for better distribution
-            const x = (Math.sin(seed) * 0.5 + 0.5) * 1200; // Deterministic x position
-            const y = (Math.cos(seed) * 0.5 + 0.5) * 800;  // Deterministic y position
+            const x = Math.round((Math.sin(seed) * 0.5 + 0.5) * 1200 * 100) / 100; // Deterministic x position, rounded
+            const y = Math.round((Math.cos(seed) * 0.5 + 0.5) * 800 * 100) / 100;  // Deterministic y position, rounded
             const duration = 15 + (i % 5) * 5; // Deterministic duration
             const delay = (i % 3) * 3; // Deterministic delay
 
