@@ -149,7 +149,7 @@ export const projects = [
       "Secure decentralized transactions",
     ],
     repoUrl: "https://github.com/AnshLaw",
-    liveUrl: "https://gigsforpi.live",
+    liveUrl: "https://gigsforpilive.netlify.app",
     images: [
       { src: "/real-time-messaging-dashboard.jpg", alt: "Gigs for Pi Dashboard" },
     ],
@@ -247,6 +247,37 @@ export const awards = [
     issuer: "Pi Network",
     date: "2024",
     link: "https://github.com/pi-network",
+  },
+]
+
+export const activities = [
+  {
+    icon: "Trophy",
+    title: "Winner - Hack Dearborn 2023 (Automotive Track & ZF Challenge)",
+    description: "Automotive Track Winner for developing an ML-powered in-cabin entertainment and recommendation system",
+    date: "Oct 2023",
+    type: "achievement",
+  },
+  {
+    icon: "SiGithub",
+    title: "Gigs for Pi - Featured on Pi Network GitHub",
+    description: "Gigs for Pi platform achieved 20,000+ likes and was featured on the official Pi Network GitHub",
+    date: "2024",
+    type: "contribution",
+  },
+  {
+    icon: "BookOpen",
+    title: "Undergraduate Co-op Thesis - LLM based In-Cabin Comfort System",
+    description: "Thesis work on LLM-based in-cabin comfort prediction and agentic RAG techniques in collaboration with Hyundai Mobis",
+    date: "2024",
+    type: "writing",
+  },
+  {
+    icon: "Briefcase",
+    title: "Completed AI/ML Engineering Co-op at Hyundai Mobis",
+    description: "Worked on LLMs, computer vision, and deployable automotive AI systems",
+    date: "Jun 2025",
+    type: "experience",
   },
 ]
 
