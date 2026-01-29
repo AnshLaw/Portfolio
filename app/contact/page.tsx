@@ -1,15 +1,11 @@
 "use client"
-
-import { useState } from "react"
-import { motion } from "framer-motion"
 import { PageLayout } from "@/components/page-layout"
 import { SectionHeader } from "@/components/section-header"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Mail, MapPin, Github, Send, MessageSquare, Phone, Calendar, Sparkles, Linkedin, Twitter } from "lucide-react"
 import { profile, socials } from "@/data/portfolio"
+import { motion } from "framer-motion"
+import { Calendar, Github, Linkedin, Mail, MapPin, MessageSquare, Sparkles, Twitter } from "lucide-react"
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -44,33 +40,14 @@ const floatingVariants = {
 }
 
 export default function ContactPage() {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    subject: "",
-    message: "",
-  })
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }))
-  }
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Handle form submission here
-    console.log("Form submitted:", formData)
-  }
+  // Contact form removed; mailto CTA provided below.
 
   // Get contact info from portfolio.ts
   const contactInfo = [
     {
       icon: Mail,
       label: "Email",
-      value: profile.email,
+      value: "Send Email",
       href: `mailto:${profile.email}`,
       color: "text-blue-500",
     },
@@ -84,9 +61,23 @@ export default function ContactPage() {
     {
       icon: Github,
       label: "GitHub",
-      value: socials.find(s => s.name === "GitHub")?.url.replace("https://", "") || "github.com/AnshLaw",
+      value: "View Profile",
       href: socials.find(s => s.name === "GitHub")?.url || "https://github.com/AnshLaw",
       color: "text-purple-500",
+    },
+    {
+      icon: Linkedin,
+      label: "LinkedIn",
+      value: "Connect with me",
+      href: socials.find(s => s.name === "LinkedIn")?.url || "https://linkedin.com/in/anshsuryavanshi",
+      color: "text-blue-600",
+    },
+    {
+      icon: Twitter,
+      label: "Twitter",
+      value: "Follow me",
+      href: socials.find(s => s.name === "Twitter")?.url || "https://twitter.com/ansh_law",
+      color: "text-sky-500",
     },
   ]
 
@@ -131,7 +122,7 @@ export default function ContactPage() {
           })}
         </div>
 
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
             title="Let's Connect"
             description="Ready to collaborate on something amazing? I'd love to hear from you and discuss how we can work together to bring your ideas to life."
@@ -139,29 +130,42 @@ export default function ContactPage() {
             className="mb-16 text-center"
           />
 
+          {/* Availability Status */}
+          <motion.div
+            variants={floatingVariants}
+            animate="animate"
+            className="flex items-center justify-center gap-3 p-6 bg-green-500/10 border border-green-500/20 rounded-xl mb-12"
+          >
+            <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
+            <div className="text-center">
+              <p className="font-medium text-green-700 dark:text-green-400">Available for new opportunities</p>
+              <p className="text-sm text-muted-foreground">Open to collaborations and exciting projects</p>
+            </div>
+          </motion.div>
+
           <motion.div
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="grid grid-cols-1 lg:grid-cols-2 gap-12"
+            className="space-y-12"
           >
-            {/* Contact Information */}
-            <motion.div variants={itemVariants} className="space-y-8">
-              <div>
-                <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-                  <Sparkles className="h-6 w-6 text-primary" />
-                  Get In Touch
-                </h2>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  I'm always excited to connect with fellow developers, potential collaborators, and companies
-                  interested in innovative AI and web development solutions. Whether you have a project in mind,
-                  want to discuss emerging technologies, or just want to chat about computer science, I'd love to hear from you!
-                </p>
-              </div>
+            {/* Introduction */}
+            <motion.div variants={itemVariants} className="text-center max-w-3xl mx-auto">
+              <h2 className="text-3xl font-bold mb-6 flex items-center justify-center gap-3">
+                <Sparkles className="h-8 w-8 text-primary" />
+                Get In Touch
+              </h2>
+              <p className="text-xl text-muted-foreground leading-relaxed">
+                I'm always excited to connect with fellow developers, potential collaborators, and companies
+                interested in innovative AI and web development solutions. Whether you have a project in mind,
+                want to discuss emerging technologies, or just want to chat about computer science, I'd love to hear from you!
+              </p>
+            </motion.div>
 
-              {/* Contact Cards */}
-              <div className="space-y-4">
+            {/* Contact Information */}
+            <motion.div variants={itemVariants}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {contactInfo.map((info, index) => (
                   <motion.div
                     key={info.label}
@@ -169,20 +173,20 @@ export default function ContactPage() {
                     whileHover={{ scale: 1.02 }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
-                    <Card className="bg-background/50 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-                      <CardContent className="p-6">
-                        <div className="flex items-center gap-4">
-                          <div className={`flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10`}>
+                    <Card className="bg-background/50 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 h-full min-h-[120px]">
+                      <CardContent className="p-6 flex items-center">
+                        <div className="flex items-center gap-4 w-full">
+                          <div className={`flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 flex-shrink-0`}>
                             <info.icon className="h-6 w-6 text-primary" />
                           </div>
-                          <div className="flex-1">
+                          <div className="flex-1 min-w-0">
                             <h3 className="font-semibold text-foreground">{info.label}</h3>
                             {info.href ? (
                               <a
                                 href={info.href}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-primary hover:underline transition-colors"
+                                className="text-primary hover:underline transition-colors break-all"
                               >
                                 {info.value}
                               </a>
@@ -196,132 +200,62 @@ export default function ContactPage() {
                   </motion.div>
                 ))}
               </div>
-
-              {/* Availability Status */}
-              <motion.div
-                variants={floatingVariants}
-                animate="animate"
-                className="flex items-center gap-3 p-4 bg-green-500/10 border border-green-500/20 rounded-xl"
-              >
-                <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
-                <div>
-                  <p className="font-medium text-green-700 dark:text-green-400">Available for new opportunities</p>
-                  <p className="text-sm text-muted-foreground">Open to collaborations and exciting projects</p>
-                </div>
-              </motion.div>
-            </motion.div>
-
-            {/* Contact Form */}
-            <motion.div variants={itemVariants}>
-              <Card className="bg-background/50 backdrop-blur-sm border-0 shadow-xl">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Send className="h-5 w-5 text-primary" />
-                    Send a Message
-                  </CardTitle>
-                  <CardDescription>
-                    Fill out the form below and I'll get back to you within 24 hours.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <label htmlFor="firstName" className="text-sm font-medium">
-                          First Name
-                        </label>
-                        <Input
-                          id="firstName"
-                          name="firstName"
-                          placeholder="John"
-                          value={formData.firstName}
-                          onChange={handleInputChange}
-                          className="bg-background/50"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <label htmlFor="lastName" className="text-sm font-medium">
-                          Last Name
-                        </label>
-                        <Input
-                          id="lastName"
-                          name="lastName"
-                          placeholder="Doe"
-                          value={formData.lastName}
-                          onChange={handleInputChange}
-                          className="bg-background/50"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <label htmlFor="email" className="text-sm font-medium">
-                        Email
-                      </label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        placeholder="john@example.com"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        className="bg-background/50"
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <label htmlFor="subject" className="text-sm font-medium">
-                        Subject
-                      </label>
-                      <Input
-                        id="subject"
-                        name="subject"
-                        placeholder="Project Collaboration"
-                        value={formData.subject}
-                        onChange={handleInputChange}
-                        className="bg-background/50"
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <label htmlFor="message" className="text-sm font-medium">
-                        Message
-                      </label>
-                      <Textarea
-                        id="message"
-                        name="message"
-                        placeholder="Tell me about your project or idea..."
-                        className="min-h-[120px] bg-background/50 resize-none"
-                        value={formData.message}
-                        onChange={handleInputChange}
-                      />
-                    </div>
-
-                    <Button
-                      type="submit"
-                      className="w-full group"
-                      size="lg"
-                    >
-                      <Send className="mr-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                      Send Message
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
             </motion.div>
           </motion.div>
 
-          {/* Call to Action */}
+          {/* Collaboration Interests */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.5 }}
-            className="mt-16 text-center"
+            transition={{ delay: 0.3 }}
+            className="mt-20"
           >
-            <div className="inline-flex items-center gap-2 px-6 py-3 bg-primary/10 border border-primary/20 rounded-full">
-              <Calendar className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium">Response time: Within 24 hours</span>
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold mb-4">Areas of Interest</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+                I'm passionate about pushing the boundaries of AI/ML and creating impactful software solutions
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                {
+                  title: "AI & Machine Learning",
+                  description: "LLM applications, computer vision, and intelligent systems development",
+                  icon: Sparkles,
+                },
+                {
+                  title: "Full-Stack Development",
+                  description: "Modern web applications with scalable architectures and clean code",
+                  icon: MessageSquare,
+                },
+                {
+                  title: "Open Source & Research",
+                  description: "Contributing to the community and exploring cutting-edge technologies",
+                  icon: Github,
+                },
+              ].map((interest, index) => (
+                <motion.div
+                  key={interest.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 * index }}
+                >
+                  <Card className="bg-background/50 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 h-full">
+                    <CardContent className="p-8 text-center">
+                      <div className="flex justify-center mb-6">
+                        <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-primary/10">
+                          <interest.icon className="h-8 w-8 text-primary" />
+                        </div>
+                      </div>
+                      <h3 className="font-semibold mb-3 text-lg">{interest.title}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{interest.description}</p>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
         </div>
