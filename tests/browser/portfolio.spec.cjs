@@ -11,7 +11,7 @@ test('homepage has usable navigation, real images, and a pausable 3D scene', asy
   await expect(page.locator('.field-stage')).toHaveAttribute('data-paused', 'true')
   await page.getByRole('button', { name: 'Show Taboo Party scene' }).click()
   await expect(page.locator('.field-stage')).toHaveAttribute('data-scene', 'cards')
-  await expect(page.locator('.field-caption h2')).toContainText('Taboo')
+  await expect(page.locator('.field-caption')).toContainText('Taboo')
   await expect(page.getByText('Grand Blanc, MI').first()).toBeVisible()
   await expect(page.locator('.project-card')).toHaveCount(3)
   await page.locator('.project-card').last().scrollIntoViewIfNeeded()

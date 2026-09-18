@@ -19,22 +19,12 @@ export const socials = [
 ]
 
 export const skills = [
-  {
-    category: "Programming Languages",
-    items: ["C", "C++", "Python", "Java", "SQL", "TypeScript", "JavaScript", "React", "R", "MATLAB"],
-  },
-  {
-    category: "AI/ML & Data Science",
-    items: ["PyTorch", "TensorFlow", "Scikit-Learn", "Pandas", "Numpy", "OpenCV", "Fine-tune LLMs", "LLM Distillation", "Generative AI", "Agentic RAG", "Agent Orchestration", "Multimodal AI", "AI-Assisted Development", "Agno", "LangChain", "LangGraph", "Fetch.ai"],
-  },
-  {
-    category: "Cloud & DevOps",
-    items: ["AWS (S3, Lambda, Amplify)", "Azure", "GCP", "Docker", "Supabase", "PostgreSQL", "MongoDB", "ChromaDB", "FAISS", "Jenkins", "Git", "Oracle", "Firebase"],
-  },
-  {
-    category: "Frameworks & Tools",
-    items: ["Next.js", "Socket.IO", "REST APIs", "CI/CD", "Distributed Systems", "Edge AI", "Agile", "SDLC", "Jira", "Flask", "Streamlit", "Expo Go", "Weka", "OpenGL", "Vulkan", "Google Gemini API", "ChatGPT API", "DeepSeek API"],
-  },
+  { category: "Programming Languages", items: ["C", "C++", "Python", "Java", "SQL", "TypeScript", "JavaScript", "R", "MATLAB"] },
+  { category: "Machine Learning & AI", items: ["Machine Learning", "Computer Vision", "LLMs", "Agentic AI", "RAG", "Model Fine-Tuning", "LLM Distillation", "PyTorch", "TensorFlow", "Scikit-Learn", "Agent Orchestration", "Multimodal AI", "AI-Assisted Development"] },
+  { category: "Systems & Backend", items: ["Flask", "REST APIs", "CI/CD", "Jenkins", "Git", "GitHub", "Distributed Systems", "Edge AI", "Agile", "SDLC", "Jira"] },
+  { category: "Data & Databases", items: ["PostgreSQL", "MongoDB", "ChromaDB", "FAISS", "Supabase", "Pandas", "NumPy"] },
+  { category: "Cloud & Platforms", items: ["AWS (S3, Lambda, Amplify)", "Google Cloud (GCP)", "Docker", "Oracle", "Google Firebase"] },
+  { category: "Tools & Frameworks", items: ["React", "Next.js", "Socket.IO", "LangChain", "LangGraph", "Agno", "OpenCV", "OpenGL", "Vulkan", "Streamlit"] },
 ]
 
 export type Project = {
@@ -281,8 +271,8 @@ export const experience = [
     company: "General Motors", role: "Software Engineer", start: "Mar 2026", end: "Present", location: "Flint, MI",
     bullets: [
       "Leading deployment of 72 AI cameras across 38 conveyors in the GM Flint plant, enabling real-time computer vision monitoring at scale.",
-      "Developed an end-to-end camera configuration pipeline covering onboarding, pilot, and production, reducing setup from 5-6 weeks to 2-3 days for TPMs across 7 GM plants.",
-      "Maintained technical documentation and tools for camera onboarding, ensuring accuracy across pipeline changes.",
+      "Developed an end-to-end automation pipeline for camera configuration, covering onboarding, pilot, and production, reducing setup time from 5-6 weeks to 2-3 days for TPMs across 7 GM plants.",
+      "Maintained and updated technical documentation and tools for the camera onboarding process, ensuring accuracy across pipeline changes.",
     ], logo: null,
   },
   {
@@ -292,10 +282,9 @@ export const experience = [
     end: "Jun 2025",
     location: "Plymouth, MI",
     bullets: [
-      "Optimized a local LLM with agentic RAG for in-vehicle edge deployment, reducing inference latency by 35% and enabling real-time voice-based driver alerts, improving engagement by 20%.",
-      "Developed an ML-based Hand Gesture Detection Model for Hyundai's in-cabin system that controls fan speed and cabin temperature, showcased at CES 2023 and planned for deployment across 5M+ vehicles by 2025",
-      "Built reusable math, vector, and matrix libraries, eliminating 30% of redundant code, with OpenCV, OpenGL, and Vulkan frameworks.",
-      "Automated CI/CD pipelines, cutting manual setup by 40% and streamlining builds and simulation tests.",
+      "Optimized a local LLM with agentic RAG for in-vehicle edge deployment, reducing inference latency by 35% and enabling a real-time voice-based driver alertness system, improving engagement by 20%.",
+      "Developed an ML-based hand gesture recognition system for in-cabin controls; showcased at CES 2023 and planned for deployment across 5M+ vehicles by 2025.",
+      "Built reusable backend libraries for math, vector, and matrix operations, eliminating 30% of redundant code; added OpenCV, OpenGL, and Vulkan-based frameworks and automated CI/CD pipelines, cutting manual setup by 40%.",
     ],
     logo: "/abstract-tech-logo.png",
   },

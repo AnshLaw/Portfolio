@@ -78,3 +78,10 @@ test('timeline parses resume dates, measures tenure, and stacks overlapping role
   const lanes = assignLanes([{ start: 'Mar 2026', end: 'Present' }, { start: 'Oct 2022', end: 'Jun 2025' }, { start: 'Oct 2023', end: 'Oct 2023' }], now)
   assert.deepEqual([...lanes], [0, 0, 1])
 })
+
+test('timeline highlights metrics but not calendar years', () => {
+  const { splitMetrics } = readModule('lib/timeline.ts')
+  const parts = splitMetrics('Cut setup from 5-6 weeks to 2-3 days, 35% faster, shown at CES 2023 for 5M+ vehicles by 2025.')
+  assert.deepEqual([...parts.filter(part => part.metric).map(part => part.text)], ['5-6', '2-3', '35%', '5M+'])
+  assert.equal(parts.map(part => part.text).join(''), 'Cut setup from 5-6 weeks to 2-3 days, 35% faster, shown at CES 2023 for 5M+ vehicles by 2025.')
+})

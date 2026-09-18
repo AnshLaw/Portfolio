@@ -16,7 +16,7 @@ export default function ProjectsPage() {
   })
   function toggleTag(tag: string) { setSelectedTags(tags => tags.includes(tag) ? tags.filter(item => item !== tag) : [...tags, tag]) }
   function clearFilters() { setSearchQuery(""); setSelectedTags([]) }
-  return <PageLayout><section className="page-container projects-page"><header className="inner-heading"><p className="section-kicker">The project archive</p><h1>Ideas are a start.<br />This is what I built.</h1><p>AI systems, connected experiences, and tools that make everyday work better.</p></header>
+  return <PageLayout><section className="page-container projects-page"><header className="inner-heading"><p className="section-kicker">Projects</p><h1>Everything I’ve built.</h1><p>Industry research, hackathon entries, and side projects people actually use. Filter by type or search by name.</p></header>
     <ProjectFilters searchQuery={searchQuery} onSearchChange={setSearchQuery} selectedTags={selectedTags} onTagToggle={toggleTag} availableTags={availableTags} onClearFilters={clearFilters} />
     <p className="project-count" aria-live="polite">{filtered.length} of {projects.length} projects</p>
     <div className="projects-grid">{filtered.map((project, index) => <ProjectCard key={project.slug} project={project} index={index} />)}</div>

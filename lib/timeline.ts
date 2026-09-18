@@ -46,3 +46,21 @@ export function assignLanes(spans: Span[], now: YearMonth) {
   }
   return lanes
 }
+
+const METRIC_PATTERN = /\d+(?:[.,]\d+)*(?:[–-]\d+)?(?:%|K\+|M\+|\+)?/g
+const CALENDAR_YEAR = /^(19|20)\d{2}$/
+
+/** Splits text so numbers that describe impact can be emphasized. */
+export function splitMetrics(text: string) {
+  const parts: { text: string; metric: boolean }[] = []
+  let cursor = 0
+  for (const match of text.matchAll(METRIC_PATTERN)) {
+    const index = match.index ?? 0
+    if (CALENDAR_YEAR.test(match[0])) continue
+    if (index > cursor) parts.push({ text: text.slice(cursor, index), metric: false })
+    parts.push({ text: match[0], metric: true })
+    cursor = index + match[0].length
+  }
+  if (cursor < text.length) parts.push({ text: text.slice(cursor), metric: false })
+  return parts
+}
