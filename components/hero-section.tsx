@@ -19,7 +19,7 @@ export function HeroSection() {
     <div className="hero-grid page-container">
       <div className="hero-copy"><HeroIdentity />
         <h1>{HEADLINE.map((line, index) => <span className="hero-line" key={line}><span style={{ "--i": index + 1 } as CSSProperties}>{line}</span>{" "}</span>)}</h1>
-        <p className="hero-description hero-rise" style={{ "--i": 4 } as CSSProperties}>Right now that means computer vision on GM’s plant floor. Before that, gesture controls and an on-device LLM for Hyundai cars. On weekends, a party game 800 people signed up to play.</p>
+        <p className="hero-description hero-rise" style={{ "--i": 4 } as CSSProperties}>Right now that means computer vision on GM’s plant floor. Before that, gesture controls and an on-device LLM for Hyundai cars. On the side, a party game 800+ people signed up to play.</p>
         <div className="hero-actions hero-rise" style={{ "--i": 5 } as CSSProperties}>
           <Link className="primary-link" href="#projects">See the projects<ArrowUpRight size={18} /></Link>
           <a className="secondary-link" href={profile.resumeUrl} download>Download resume<Download size={17} /></a>
