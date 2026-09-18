@@ -51,19 +51,20 @@ export default function ProjectPageClient({ params }: ProjectPageProps) {
               <p className="text-xl text-muted-foreground leading-relaxed">{project.summary}</p>
             </div>
 
+            {project.links?.map(link => <a className="secondary-link mr-6" key={link.url} href={link.url} target="_blank" rel="noopener noreferrer">{link.label}<ExternalLink size={16} /></a>)}
             {/* Action Buttons */}
             <div className="flex flex-wrap gap-4">
               {project.liveUrl && (
                 <Button asChild>
-                  <Link href={project.liveUrl} target="_blank">
+                  <Link href={project.liveUrl} target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="mr-2 h-4 w-4" />
-                    View Live Demo
+                    {project.liveLabel || "Visit project"}
                   </Link>
                 </Button>
               )}
               {project.repoUrl ? (
                 <Button variant="outline" asChild>
-                  <Link href={project.repoUrl!} target="_blank">
+                  <Link href={project.repoUrl!} target="_blank" rel="noopener noreferrer">
                     <SiGithub className="mr-2 h-4 w-4" />
                     View Source Code
                   </Link>
@@ -71,7 +72,7 @@ export default function ProjectPageClient({ params }: ProjectPageProps) {
               ) : (
                 <Button variant="outline" disabled className="cursor-not-allowed">
                   <SiGithub className="mr-2 h-4 w-4" />
-                  Confidential
+                  {project.sourceLabel || (project.slug === "llm-reasoning-system" ? "Industry research" : "Private source")}
                 </Button>
               )}
             </div>
@@ -160,15 +161,15 @@ export default function ProjectPageClient({ params }: ProjectPageProps) {
                 <CardContent className="space-y-3">
                   {project.liveUrl && (
                     <Button variant="outline" asChild className="w-full justify-start bg-transparent">
-                      <Link href={project.liveUrl} target="_blank">
+                      <Link href={project.liveUrl} target="_blank" rel="noopener noreferrer">
                         <ExternalLink className="mr-2 h-4 w-4" />
-                        Live Demo
+                        {project.liveLabel || "Visit project"}
                       </Link>
                     </Button>
                   )}
                   {project.repoUrl ? (
                     <Button variant="outline" asChild className="w-full justify-start bg-transparent">
-                      <Link href={project.repoUrl!} target="_blank">
+                      <Link href={project.repoUrl!} target="_blank" rel="noopener noreferrer">
                         <SiGithub className="mr-2 h-4 w-4" />
                         Source Code
                       </Link>
@@ -176,7 +177,7 @@ export default function ProjectPageClient({ params }: ProjectPageProps) {
                   ) : (
                     <Button variant="outline" disabled className="w-full justify-start bg-transparent cursor-not-allowed">
                       <SiGithub className="mr-2 h-4 w-4" />
-                      Confidential
+                      {project.sourceLabel || (project.slug === "llm-reasoning-system" ? "Industry research" : "Private source")}
                     </Button>
                   )}
                 </CardContent>

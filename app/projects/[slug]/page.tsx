@@ -3,7 +3,7 @@ import { projects } from "@/data/portfolio"
 import ProjectPageClient from "./ProjectPageClient"
 
 interface ProjectPageProps {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
