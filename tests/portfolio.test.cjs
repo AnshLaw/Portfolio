@@ -85,3 +85,30 @@ test('timeline highlights metrics but not calendar years', () => {
   assert.deepEqual([...parts.filter(part => part.metric).map(part => part.text)], ['5-6', '2-3', '35%', '5M+'])
   assert.equal(parts.map(part => part.text).join(''), 'Cut setup from 5-6 weeks to 2-3 days, 35% faster, shown at CES 2023 for 5M+ vehicles by 2025.')
 })
+
+test('timeline covers roles, study, projects, and wins newest-first without treating hackathons as roles', () => {
+  const { experience, milestones, projects } = readModule('data/portfolio.ts')
+  const { parseMonth, toIndex } = readModule('lib/timeline.ts')
+  const now = { year: 2026, month: 8 }
+  assert.ok(experience.every(job => !/hack/i.test(job.company)))
+  assert.deepEqual([...new Set(milestones.map(item => item.kind))].sort(), ['project', 'study', 'win', 'work'])
+  for (const title of ['General Motors', 'Hyundai Mobis', 'Taboo Party', 'Givvy', 'MEDC', 'CES 2023', 'Kettering']) {
+    assert.ok(milestones.some(item => `${item.title} ${item.org}`.includes(title)), title)
+  }
+  const starts = [...milestones.map(item => toIndex(parseMonth(item.start, now)))]
+  assert.deepEqual(starts, [...starts].sort((first, second) => second - first))
+  for (const item of milestones.filter(item => item.href?.startsWith('/projects/'))) {
+    assert.ok(projects.some(project => item.href === `/projects/${project.slug}/`), item.href)
+  }
+  assert.equal(new Set(milestones.map(item => item.id)).size, milestones.length)
+})
+
+test('year-only dates sit mid-year', () => {
+  const { parseMonth } = readModule('lib/timeline.ts')
+  assert.deepEqual({ ...parseMonth('2023', { year: 2026, month: 8 }) }, { year: 2023, month: 6 })
+})
+
+test('numbers inside words are not treated as metrics', () => {
+  const { splitMetrics } = readModule('lib/timeline.ts')
+  assert.deepEqual([...splitMetrics('A Web3 app with 20,000+ likes').filter(part => part.metric).map(part => part.text)], ['20,000+'])
+})

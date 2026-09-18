@@ -288,18 +288,72 @@ export const experience = [
     ],
     logo: "/abstract-tech-logo.png",
   },
+]
+
+export type MilestoneKind = "work" | "study" | "project" | "win"
+export type Milestone = {
+  id: string; kind: MilestoneKind; label: string; title: string; org: string
+  start: string; end: string; location?: string; summary?: string; bullets?: string[]; href?: string
+}
+
+/** Everything on the experience timeline, newest start first. */
+export const milestones: Milestone[] = [
   {
-    company: "Hack Dearborn 2023",
-    role: "Competition Winner - Automotive Track & ZF Challenge",
-    start: "Oct 2023",
-    end: "Oct 2023",
-    location: "Dearborn, MI",
+    id: "gm", kind: "work", label: "Role", title: "Software Engineer", org: "General Motors", start: "Mar 2026", end: "Present", location: "Flint, MI",
+    bullets: experience[0].bullets,
+  },
+  {
+    id: "taboo", kind: "project", label: "Side project · Founder", title: "Taboo Party", org: "tabooparty.online", start: "Dec 2025", end: "Present",
+    summary: "A real-time multiplayer word game in the browser and as an official Discord Activity. Next.js, TypeScript, and Socket.IO. 52,000+ visits, 800+ registered users, and a 100+ member community server.",
+    href: "/projects/taboo-party/",
+  },
+  {
+    id: "givvy", kind: "win", label: "Hackathon win", title: "1st place, Hack Dearborn 4 with Givvy", org: "University of Michigan–Dearborn", start: "Oct 2025", end: "Oct 2025", location: "Dearborn, MI",
+    summary: "24 hours, team of three with Andrew Ricard and Melvin Cloud. A battery-free NFC gift card with an e-ink display, AES-encrypted and tokenized, plus web and point-of-sale apps. Won the Amazon Financial Firewall (FinTech) track among 240+ participants.",
+    href: "/projects/givvy/",
+  },
+  {
+    id: "graduation", kind: "study", label: "Graduated", title: "B.S. Computer Science, GPA 3.94", org: "Kettering University", start: "Sep 2025", end: "Sep 2025", location: "Flint, MI",
     bullets: [
-      "Built an ML-powered in-cabin recommendation system using trip ETA, age detection, and user genres to suggest media with 89% accuracy",
-      "Integrated with Google Maps API and hand gesture controls for collaboration tools (whiteboard & online meeting apps) and volume adjustments",
-      "Won both Automotive Track and ZF Challenge at Hack Dearborn 2023",
+      "Concentration in AI, minor in Applied Mathematics.",
+      "Dean’s List 2021–2025. Member of the UPE Computer Science and KME Mathematics honor societies.",
+      "Facility Manager at the Recreation Center, VP of the International Club, and a Volleyball Club member.",
     ],
-    logo: "/startup-logo.png",
+  },
+  {
+    id: "rec-it", kind: "project", label: "Side project", title: "REC-IT", org: "Kettering Recreation Center", start: "Jul 2025", end: "Sep 2025",
+    summary: "A full-stack React and TypeScript app on Supabase and Firebase that replaced the Rec Center’s manual workflows — built for the place I was already managing shifts at.",
+    href: "/projects/rec-it-app/",
+  },
+  {
+    id: "thesis", kind: "study", label: "Undergraduate thesis", title: "LLM reasoning for in-cabin comfort", org: "Kettering University & Hyundai Mobis", start: "Apr 2025", end: "Present",
+    summary: "A local LLM reasoning system using agentic RAG and multi-modal sensor data for low-latency, on-device comfort and entertainment recommendations, tested on a Cruden driving simulator.",
+    href: "/projects/llm-reasoning-system/",
+  },
+  {
+    id: "gigs-for-pi", kind: "project", label: "Side project", title: "Gigs for Pi", org: "Pi Network", start: "Jun 2024", end: "Dec 2024",
+    summary: "A Web3 freelancing platform in TypeScript and Supabase. 20,000+ likes, a 4.78/5 rating across 37,000+ reviews, and a feature on the official Pi Network GitHub.",
+    href: "/projects/gigs-for-pi/",
+  },
+  {
+    id: "hack-dearborn-2023", kind: "win", label: "Hackathon win · first hackathon", title: "Automotive track + ZF challenge, Hack Dearborn", org: "Hack Dearborn: Disrupt Reality", start: "Oct 2023", end: "Oct 2023", location: "Dearborn, MI",
+    summary: "My first hackathon: nearly 200 students, 24 hours. I built the age and hand-gesture detection behind an in-car media recommender that matched content to trip length with 89% accuracy. Took both the Automotive track and ZF’s problem statement.",
+    href: "/projects/road-entertainment-system/",
+  },
+  {
+    id: "medc", kind: "win", label: "Scholarship", title: "$10,000 MEDC Michigan Scholar Award", org: "Michigan Economic Development Corporation", start: "2023", end: "2023",
+  },
+  {
+    id: "ces", kind: "win", label: "Showcase", title: "Gesture controls on stage at CES 2023", org: "Hyundai Mobis", start: "Jan 2023", end: "Jan 2023", location: "Las Vegas, NV",
+    summary: "The in-cabin hand-gesture recognition I worked on was demoed at CES 2023, with deployment planned across 5M+ vehicles.",
+  },
+  {
+    id: "hyundai", kind: "work", label: "Role · rotational co-op", title: "AI/ML Engineer", org: "Hyundai Mobis", start: "Oct 2022", end: "Jun 2025", location: "Plymouth, MI",
+    bullets: experience[1].bullets,
+  },
+  {
+    id: "kettering", kind: "study", label: "Education", title: "Started Computer Science", org: "Kettering University", start: "Oct 2021", end: "Sep 2025", location: "Flint, MI",
+    summary: "B.S. in Computer Science with a concentration in AI and a minor in Applied Mathematics.",
   },
 ]
 
