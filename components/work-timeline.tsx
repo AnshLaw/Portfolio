@@ -25,7 +25,7 @@ const PERCENT = 100
 const ORDER = milestones.map(item => item.id)
 
 const entryId = (item: Milestone) => `milestone-${item.id}`
-const jumpName = (item: Milestone) => (item.kind === "work" ? item.org : item.title)
+const jumpName = (item: Milestone) => (item.kind === "work" ? item.org : `${item.title}, ${item.start}`)
 const last = <T,>(items: T[]) => items[items.length - 1]
 
 function useRange(now: YearMonth) {

@@ -5,6 +5,8 @@ const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "
 const MONTHS_PER_YEAR = 12
 const ONGOING = "Present"
 const MID_YEAR = 6
+/** Month index at the middle of each season, for dates like "Fall 2024". */
+const SEASON_MIDPOINTS: Record<string, number> = { Winter: 0, Spring: 3, Summer: 6, Fall: 9 }
 
 export function currentMonth(date = new Date()): YearMonth {
   return { year: date.getFullYear(), month: date.getMonth() }
@@ -15,6 +17,7 @@ export function parseMonth(label: string, now: YearMonth): YearMonth {
   // Year-only dates (month unknown) sit mid-year so they land inside the right year on the ruler.
   if (/^\d{4}$/.test(label.trim())) return { year: Number(label), month: MID_YEAR }
   const [monthName, year] = label.trim().split(/\s+/)
+  if (monthName in SEASON_MIDPOINTS && Number(year)) return { year: Number(year), month: SEASON_MIDPOINTS[monthName] }
   const month = MONTHS.indexOf(monthName.slice(0, 3))
   if (month < 0 || !Number(year)) throw new Error(`Unrecognized timeline date: "${label}"`)
   return { year: Number(year), month }
