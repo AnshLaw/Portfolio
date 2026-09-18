@@ -1,29 +1,12 @@
 "use client"
-
-import type React from "react"
-
-import { motion } from "framer-motion"
+import type { ReactNode } from "react"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
+import { usePageMotion } from "@/hooks/use-page-motion"
 
-interface PageLayoutProps {
-  children: React.ReactNode
-  className?: string
-}
+const MAIN_ID = "main-content"
 
-export function PageLayout({ children, className }: PageLayoutProps) {
-  return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <motion.main
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className={className}
-      >
-        <div className="pt-16">{children}</div>
-      </motion.main>
-      <Footer />
-    </div>
-  )
+export function PageLayout({ children, className }: { children: ReactNode; className?: string }) {
+  usePageMotion(MAIN_ID)
+  return <div className="site-shell"><a className="skip-link" href={`#${MAIN_ID}`}>Skip to content</a><Navbar /><main id={MAIN_ID} className={className}>{children}</main><Footer /></div>
 }

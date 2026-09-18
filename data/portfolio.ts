@@ -1,11 +1,11 @@
 export const profile = {
   name: "Ansh Raj Suryavanshi",
-  title: "Computer Science Graduate & AI Engineering Intern",
-  location: "Flint, MI",
+  title: "Software Engineer / AI Engineer",
+  location: "Grand Blanc, MI",
   graduationDate: "September 2025",
-  aboutShort: "AI/ML Engineer specializing in LLM applications, computer vision, and full-stack development.",
+  aboutShort: "Software Engineer at General Motors. Building applied AI, real-time systems, and products people use.",
   aboutLong:
-    "Passionate Computer Science student at Kettering University with expertise in AI/ML, computer vision, and full-stack development. Currently interning at Hyundai Mobis working on LLM-based reasoning systems and ML-powered automotive applications. Winner of Hack Dearborn 2023 and experienced in developing scalable web applications and AI-powered solutions.",
+    "Software Engineer at General Motors, deploying computer vision across manufacturing operations. Previously an AI/ML Engineer at Hyundai Mobis, building agentic RAG, edge AI, and in-cabin gesture recognition systems. I graduated from Kettering University with a B.S. in Computer Science, an AI concentration, an Applied Mathematics minor, and a 3.94 GPA. Outside work, I build products like Taboo Party and compete at hackathons, including wins at Hack Dearborn in 2023 and 2025.",
   email: "anshraj65@gmail.com",
   resumeUrl: "/Ansh_Raj_Suryavanshi_Software_Engineer_Resume.pdf",
   avatarUrl: "/ansh.jpg",
@@ -19,28 +19,108 @@ export const socials = [
 ]
 
 export const skills = [
-  {
-    category: "Programming Languages",
-    items: ["C", "C++", "Python", "Java", "SQL", "TypeScript", "JavaScript", "React", "R", "MATLAB"],
-  },
-  {
-    category: "AI/ML & Data Science",
-    items: ["PyTorch", "TensorFlow", "Scikit-Learn", "Pandas", "Numpy", "OpenCV", "Fine-tune LLMs", "LLM Distillation", "Generative AI", "Agno", "LangChain", "LangGraph", "Fetch.ai"],
-  },
-  {
-    category: "Cloud & DevOps",
-    items: ["AWS", "Azure", "GCP", "Supabase", "MongoDB", "Jenkins", "Git"],
-  },
-  {
-    category: "Frameworks & Tools",
-    items: ["Flask", "Streamlit", "Expo Go", "Weka", "OpenGL", "Vulkan", "Google Gemini API", "ChatGPT API", "DeepSeek API"],
-  },
+  { category: "Programming Languages", items: ["C", "C++", "Python", "Java", "SQL", "TypeScript", "JavaScript", "R", "MATLAB"] },
+  { category: "Machine Learning & AI", items: ["Machine Learning", "Computer Vision", "LLMs", "Agentic AI", "RAG", "Model Fine-Tuning", "LLM Distillation", "PyTorch", "TensorFlow", "Scikit-Learn", "Agent Orchestration", "Multimodal AI", "AI-Assisted Development"] },
+  { category: "Systems & Backend", items: ["Flask", "REST APIs", "CI/CD", "Jenkins", "Git", "GitHub", "Distributed Systems", "Edge AI", "Agile", "SDLC", "Jira"] },
+  { category: "Data & Databases", items: ["PostgreSQL", "MongoDB", "ChromaDB", "FAISS", "Supabase", "Pandas", "NumPy"] },
+  { category: "Cloud & Platforms", items: ["AWS (S3, Lambda, Amplify)", "Google Cloud (GCP)", "Docker", "Oracle", "Google Firebase"] },
+  { category: "Tools & Frameworks", items: ["React", "Next.js", "Socket.IO", "LangChain", "LangGraph", "Agno", "OpenCV", "OpenGL", "Vulkan", "Streamlit"] },
 ]
 
-export const projects = [
+export type Project = {
+  slug: string; title: string; summary: string; problem: string; solution: string;
+  impact: string; tech: string[]; highlights: string[]; repoUrl: string | null;
+  liveUrl: string | null; images: { src: string; alt: string }[]; tags: string[];
+  links?: { label: string; url: string }[]; period?: string; sourceLabel?: string;
+  liveLabel?: string;
+}
+
+export const projects: Project[] = [
+{
+  "slug": "taboo-party",
+  "title": "Taboo Party",
+  "summary": "A real-time multiplayer word game, built for the browser and Discord. 52,000+ visits and 800+ registered players.",
+  "problem": "Playing a word game remotely should feel as immediate and social as being in the same room.",
+  "solution": "Built and deployed a multiplayer game with Next.js, React, TypeScript, and Socket.IO, integrated as an official Discord Activity. Players join rooms, form teams, and play timed rounds together.",
+  "impact": "52,000+ visits, 800+ registered users, and a community of 100+ Discord server members.",
+  "tech": [
+    "Next.js",
+    "TypeScript",
+    "React",
+    "Socket.IO",
+    "Discord Activities"
+  ],
+  "highlights": [
+    "52,000+ visits",
+    "800+ registered users",
+    "Official Discord Activity",
+    "100+ community members"
+  ],
+  "repoUrl": null,
+  "liveUrl": "https://tabooparty.online",
+  "images": [
+    {
+      "src": "/projects/taboo-party.jpg",
+      "alt": "Taboo Party multiplayer word game homepage"
+    }
+  ],
+  "tags": [
+    "web",
+    "real-time",
+    "games"
+  ],
+  "period": "Dec 2025 - Present",
+  "sourceLabel": "Private source",
+  "links": [
+    {
+      "label": "Play on Discord",
+      "url": "https://discord.com/discovery/applications/1468756639938252891"
+    },
+    {
+      "label": "Join the community",
+      "url": "https://discord.com/invite/hemVkeHYmM"
+    }
+  ]
+},
+{
+  "slug": "givvy",
+  "title": "Givvy",
+  "summary": "AES-encrypted NFC e-ink gift cards, with web and point-of-sale apps. A Hack Dearborn 2025 winner.",
+  "problem": "Physical gift cards need a secure digital experience for both the person receiving them and the merchant accepting them.",
+  "solution": "Built an AES-encrypted NFC e-ink gift card platform using TypeScript and Supabase, with companion web and point-of-sale applications.",
+  "impact": "Won at Hack Dearborn 2025 among 240+ participants in Amazon's Financial Firewall track.",
+  "tech": [
+    "TypeScript",
+    "Supabase",
+    "AES Encryption",
+    "NFC",
+    "E-ink"
+  ],
+  "highlights": [
+    "Hack Dearborn 2025 winner",
+    "240+ participants",
+    "Encrypted NFC gift cards",
+    "Web and POS applications"
+  ],
+  "repoUrl": "https://github.com/AnshLaw/Givvy",
+  "liveUrl": null,
+  "images": [
+    {
+      "src": "/projects/givvy.jpg",
+      "alt": "Givvy encrypted NFC gift card concept illustration"
+    }
+  ],
+  "tags": [
+    "web",
+    "security",
+    "hackathon"
+  ],
+  "period": "Oct 2025"
+},
   {
     slug: "llm-reasoning-system",
-    title: "Undergraduate Co-op Thesis - LLM based In-Cabin Comfort System",
+    title: "In-Cabin AI Comfort System",
+    period: "Apr 2025 - Present",
     summary:
       "Scalable local LLM-based reasoning system for real-time in-cabin comfort prediction and entertainment suggestions using multi-modal sensor data.",
     problem:
@@ -58,7 +138,7 @@ export const projects = [
     repoUrl: null,
     liveUrl: null,
     images: [
-      { src: "/machine-learning-dashboard-with-charts.jpg", alt: "LLM System Dashboard" },
+      {"src": "/projects/llm-reasoning-system.jpg", "alt": "In-cabin AI: multimodal sensors and local reasoning concept"},
     ],
     tags: ["ai", "automotive", "ml", "llm"],
   },
@@ -81,13 +161,15 @@ export const projects = [
     repoUrl: "https://github.com/AnshLaw/RoadEntertainment",
     liveUrl: null,
     images: [
-      { src: "/modern-chat-interface-dark-theme.jpg", alt: "Entertainment System Interface" },
+      {"src": "/projects/road-entertainment-system.jpg", "alt": "Road Entertainment: route-aware media recommendations concept"},
     ],
     tags: ["ml", "automotive", "hackathon"],
+    period: "Oct 2023",
   },
   {
     slug: "rec-it-app",
     title: "REC-IT Recreation Center App",
+    period: "Jul 2025 - Sep 2025",
     summary: "Full-stack web app for Kettering University's Rec Center with in-app check-in, equipment checkouts, and events scheduling.",
     problem:
       "Manual Google Sheets workflows for recreation center management were inefficient and error-prone.",
@@ -104,7 +186,7 @@ export const projects = [
     repoUrl: "https://github.com/AnshLaw/REC-IT",
     liveUrl: "https://kurecit.netlify.app/signin",
     images: [
-      { src: "/react-components-showcase-grid.jpg", alt: "REC-IT App Interface" },
+      {"src": "/projects/rec-it-app.jpg", "alt": "REC-IT recreation center application sign-in"},
     ],
     tags: ["web", "full-stack", "productivity"],
   },
@@ -124,16 +206,19 @@ export const projects = [
       "Firebase authentication",
       "AWS S3/Amplify integration",
     ],
-    repoUrl: "https://github.com/AnshLaw",
+    repoUrl: null,
     liveUrl: "https://transcripto.live",
+    liveLabel: "Website (may be unavailable)",
+    sourceLabel: "Private source",
     images: [
-      { src: "/component-library-storybook-interface.jpg", alt: "Transcripto Interface" },
+      {"src": "/projects/transcripto-app.jpg", "alt": "Transcripto: audio to study resources concept"},
     ],
     tags: ["web", "ai", "education"],
   },
   {
     slug: "gigs-for-pi",
     title: "Gigs for Pi - Web3 Freelancing Platform",
+    period: "Jun 2024 - Dec 2024",
     summary: "Web3 freelancing platform powered by Pi cryptocurrency with 20,000+ likes and 4.78/5 star rating.",
     problem:
       "Traditional freelancing platforms lacked decentralized, secure payment systems using cryptocurrency.",
@@ -148,10 +233,10 @@ export const projects = [
       "Featured on Pi Network GitHub",
       "Secure decentralized transactions",
     ],
-    repoUrl: "https://github.com/AnshLaw",
+    repoUrl: null,
     liveUrl: "https://gigsforpilive.netlify.app",
     images: [
-      { src: "/real-time-messaging-dashboard.jpg", alt: "Gigs for Pi Dashboard" },
+      {"src": "/projects/gigs-for-pi.jpg", "alt": "Gigs for Pi freelancing platform homepage"},
     ],
     tags: ["web3", "blockchain", "freelancing"],
   },
@@ -175,7 +260,7 @@ export const projects = [
     repoUrl: null,
     liveUrl: "https://songchat.online",
     images: [
-      { src: "/real-time-messaging-dashboard.jpg", alt: "SongChat Interface" },
+      {"src": "/projects/songchat.jpg", "alt": "SongChat music-based social platform homepage"},
     ],
     tags: ["web", "social", "music", "real-time"],
   }
@@ -183,16 +268,23 @@ export const projects = [
 
 export const experience = [
   {
+    company: "General Motors", role: "Software Engineer", start: "Mar 2026", end: "Present", location: "Flint, MI",
+    bullets: [
+      "Leading deployment of 72 AI cameras across 38 conveyors in the GM Flint plant, enabling real-time computer vision monitoring at scale.",
+      "Developed an end-to-end automation pipeline for camera configuration, covering onboarding, pilot, and production, reducing setup time from 5-6 weeks to 2-3 days for TPMs across 7 GM plants.",
+      "Maintained and updated technical documentation and tools for the camera onboarding process, ensuring accuracy across pipeline changes.",
+    ], logo: null,
+  },
+  {
     company: "Hyundai Mobis",
-    role: "Co-op / AI Engineering Intern",
+    role: "AI/ML Engineer (Rotational Co-op, 12 months FTE)",
     start: "Oct 2022",
     end: "Jun 2025",
     location: "Plymouth, MI",
     bullets: [
-      "Optimized a local LLM with agentic RAG for real-time drowsiness detection warning system, integrated into the Cruden simulator to enable reasoning-based alerts and efficient edge deployment using Agno, LangChain, Ollama, and Hugging Face",
-      "Developed an ML-based Hand Gesture Detection Model for Hyundai's in-cabin system that controls fan speed and cabin temperature, showcased at CES 2023 and set for deployment in 5M+ vehicles by 2025",
-      "Developed company-wide reusable backend libraries for Math, Vector and Matrix operations, along with OpenCV, OpenGL, and Vulkan-based implementations",
-      "Designed CI/CD automation workflow pipeline for streamlining builds and running simulation tests efficiently",
+      "Optimized a local LLM with agentic RAG for in-vehicle edge deployment, reducing inference latency by 35% and enabling a real-time voice-based driver alertness system, improving engagement by 20%.",
+      "Developed an ML-based hand gesture recognition system for in-cabin controls; showcased at CES 2023 and planned for deployment across 5M+ vehicles by 2025.",
+      "Built reusable backend libraries for math, vector, and matrix operations, eliminating 30% of redundant code; added OpenCV, OpenGL, and Vulkan-based frameworks and automated CI/CD pipelines, cutting manual setup by 40%.",
     ],
     logo: "/abstract-tech-logo.png",
   },
@@ -212,6 +304,7 @@ export const experience = [
 ]
 
 export const awards = [
+  { title: "Winner - Hack Dearborn 2025 (Amazon Financial Firewall Track)", issuer: "Hack Dearborn", date: "Oct 2025", link: "https://github.com/AnshLaw/Givvy" },
   {
     title: "Winner - Hack Dearborn 2023 (Automotive Track & ZF Challenge)",
     issuer: "Hack Dearborn",
@@ -246,11 +339,14 @@ export const awards = [
     title: "Gigs for Pi - Featured on Pi Network GitHub",
     issuer: "Pi Network",
     date: "2024",
-    link: "https://github.com/pi-network",
+    link: "https://github.com/pi-apps/PiOS/blob/main/list.md",
   },
 ]
 
 export const activities = [
+  { icon: "Briefcase", title: "Software Engineer at General Motors", description: "Deploying 72 AI cameras across 38 conveyors and accelerating camera onboarding across 7 plants.", date: "Mar 2026", type: "experience" },
+  { icon: "Code", title: "Launched Taboo Party", description: "Real-time multiplayer in the browser and Discord. 52,000+ visits and 800+ registered users.", date: "Dec 2025", type: "contribution" },
+  { icon: "Trophy", title: "Won Hack Dearborn 2025 with Givvy", description: "AES-encrypted NFC e-ink gift cards with web and point-of-sale apps.", date: "Oct 2025", type: "achievement" },
   {
     icon: "Trophy",
     title: "Winner - Hack Dearborn 2023 (Automotive Track & ZF Challenge)",
@@ -269,7 +365,7 @@ export const activities = [
     icon: "BookOpen",
     title: "Undergraduate Co-op Thesis - LLM based In-Cabin Comfort System",
     description: "Thesis work on LLM-based in-cabin comfort prediction and agentic RAG techniques in collaboration with Hyundai Mobis",
-    date: "2024",
+    date: "Apr 2025",
     type: "writing",
   },
   {
@@ -286,11 +382,8 @@ export const education = [
     school: "Kettering University",
     degree: "Bachelor of Science in Computer Science, Concentration in AI, Minor in Applied Mathematics",
     period: "October 2021 - September 2025",
+    gpa: "3.94",
     details:
-      "Relevant Coursework: AI, Machine Learning, Operating Systems, Cloud Computing, Data Structures & Algorithms, Data Science, Theory of Computation, Object Oriented Programming, Statistics and Data Analysis, Information Retrieval & Data Mining, UI/UX, Cryptography, Digital Systems, Microcomputers, Cybersecurity • Activities: Facility Manager at Rec Center, Volleyball Club, VP at International Club • Honors: Dean's List 2021-2025, UPE CS & KME Math Honor Societies, Hack Dearborn 2023 Winner, $10,000 MEDC Michigan Scholar Award",
+      "Relevant Coursework: AI, Machine Learning, Operating Systems, Cloud Computing, Data Structures & Algorithms, Data Science, Theory of Computation, Object Oriented Programming, Statistics and Data Analysis, Information Retrieval & Data Mining, UI/UX, Cryptography, Digital Systems, Microcomputers, Cybersecurity • Activities: Facility Manager at Rec Center, Volleyball Club, VP at International Club • Honors: Dean's List 2021-2025, UPE CS & KME Math Honor Societies, Hack Dearborn 2023/2025 Winner, $10,000 MEDC Michigan Scholar Award",
   },
-]
-
-export const blog = [
-  // Placeholder for future blog posts
 ]
