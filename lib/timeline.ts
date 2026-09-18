@@ -4,6 +4,7 @@ export type Span = { start: string; end: string }
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 const MONTHS_PER_YEAR = 12
 const ONGOING = "Present"
+const MID_YEAR = 6
 
 export function currentMonth(date = new Date()): YearMonth {
   return { year: date.getFullYear(), month: date.getMonth() }
@@ -11,6 +12,8 @@ export function currentMonth(date = new Date()): YearMonth {
 
 export function parseMonth(label: string, now: YearMonth): YearMonth {
   if (label.trim() === ONGOING) return now
+  // Year-only dates (month unknown) sit mid-year so they land inside the right year on the ruler.
+  if (/^\d{4}$/.test(label.trim())) return { year: Number(label), month: MID_YEAR }
   const [monthName, year] = label.trim().split(/\s+/)
   const month = MONTHS.indexOf(monthName.slice(0, 3))
   if (month < 0 || !Number(year)) throw new Error(`Unrecognized timeline date: "${label}"`)
@@ -47,7 +50,7 @@ export function assignLanes(spans: Span[], now: YearMonth) {
   return lanes
 }
 
-const METRIC_PATTERN = /\d+(?:[.,]\d+)*(?:[–-]\d+)?(?:%|K\+|M\+|\+)?/g
+const METRIC_PATTERN = /(?<![A-Za-z])\d+(?:[.,]\d+)*(?:[–-]\d+)?(?:%|K\+|M\+|\+)?/g
 const CALENDAR_YEAR = /^(19|20)\d{2}$/
 
 /** Splits text so numbers that describe impact can be emphasized. */
