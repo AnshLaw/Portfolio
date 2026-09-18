@@ -112,3 +112,21 @@ test('numbers inside words are not treated as metrics', () => {
   const { splitMetrics } = readModule('lib/timeline.ts')
   assert.deepEqual([...splitMetrics('A Web3 app with 20,000+ likes').filter(part => part.metric).map(part => part.text)], ['20,000+'])
 })
+
+test('season dates sit in the middle of the season', () => {
+  const { parseMonth } = readModule('lib/timeline.ts')
+  const now = { year: 2026, month: 8 }
+  assert.deepEqual({ ...parseMonth('Fall 2024', now) }, { year: 2024, month: 9 })
+  assert.deepEqual({ ...parseMonth('Summer 2025', now) }, { year: 2025, month: 6 })
+})
+
+test('scholarship is two awards and every project with dates is on the timeline', () => {
+  const { milestones, projects } = readModule('data/portfolio.ts')
+  const scholarships = milestones.filter(item => /Michiganders/.test(item.title))
+  assert.deepEqual([...scholarships.map(item => item.start)], ['Summer 2025', 'Fall 2024'])
+  assert.ok(!milestones.some(item => item.start === '2023'))
+  for (const slug of ['transcripto-app', 'songchat']) {
+    assert.ok(projects.find(project => project.slug === slug).period, slug)
+    assert.ok(milestones.some(item => item.href === `/projects/${slug}/`), slug)
+  }
+})

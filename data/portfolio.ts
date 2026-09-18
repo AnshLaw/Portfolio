@@ -193,6 +193,7 @@ export const projects: Project[] = [
   {
     slug: "transcripto-app",
     title: "Transcripto App",
+    period: "Aug 2025 - Sep 2025",
     summary: "Cloud-based React application for AI-powered transcriptions and automatic study resource generation.",
     problem:
       "Students lacked efficient tools to transcribe audio/video content and generate study materials automatically.",
@@ -243,6 +244,7 @@ export const projects: Project[] = [
   {
     slug: "songchat",
     title: "SongChat - Music-Based Social Connection Platform",
+    period: "Apr 2025 - May 2025",
     summary: "Real-time chat platform that connects music lovers listening to the same song, creating ephemeral conversations tied to shared musical moments.",
     problem:
       "Music streaming platforms lack social features that connect listeners in real-time based on what they're currently playing, missing opportunities for serendipitous connections.",
@@ -321,6 +323,14 @@ export const milestones: Milestone[] = [
     ],
   },
   {
+    id: "transcripto", kind: "project", label: "Side project", title: "Transcripto", org: "React · AWS · Firebase", start: "Aug 2025", end: "Sep 2025",
+    summary: "Upload a lecture’s audio or video and get back a transcript plus study resources generated from it. React on AWS Amplify and S3, with Firebase.",
+    href: "/projects/transcripto-app/",
+  },
+  {
+    id: "michiganders-summer-2025", kind: "win", label: "Scholarship", title: "$5,000 Michiganders Scholarship", org: "Michigan Economic Development Corporation (MEDC)", start: "Summer 2025", end: "Summer 2025",
+  },
+  {
     id: "rec-it", kind: "project", label: "Side project", title: "REC-IT", org: "Kettering Recreation Center", start: "Jul 2025", end: "Sep 2025",
     summary: "A full-stack React and TypeScript app on Supabase and Firebase that replaced the Rec Center’s manual workflows — built for the place I was already managing shifts at.",
     href: "/projects/rec-it-app/",
@@ -331,6 +341,14 @@ export const milestones: Milestone[] = [
     href: "/projects/llm-reasoning-system/",
   },
   {
+    id: "songchat", kind: "project", label: "Side project", title: "SongChat", org: "songchat.online", start: "Apr 2025", end: "May 2025",
+    summary: "A chat room for everyone listening to the same song right now, gone when the song ends. React, Node, Socket.IO, and the Spotify Web API; 500+ users.",
+    href: "/projects/songchat/",
+  },
+  {
+    id: "michiganders-fall-2024", kind: "win", label: "Scholarship", title: "$5,000 Michiganders Scholarship", org: "Michigan Economic Development Corporation (MEDC)", start: "Fall 2024", end: "Fall 2024",
+  },
+  {
     id: "gigs-for-pi", kind: "project", label: "Side project", title: "Gigs for Pi", org: "Pi Network", start: "Jun 2024", end: "Dec 2024",
     summary: "A Web3 freelancing platform in TypeScript and Supabase. 20,000+ likes, a 4.78/5 rating across 37,000+ reviews, and a feature on the official Pi Network GitHub.",
     href: "/projects/gigs-for-pi/",
@@ -339,9 +357,6 @@ export const milestones: Milestone[] = [
     id: "hack-dearborn-2023", kind: "win", label: "Hackathon win · first hackathon", title: "Automotive track + ZF challenge, Hack Dearborn", org: "Hack Dearborn: Disrupt Reality", start: "Oct 2023", end: "Oct 2023", location: "Dearborn, MI",
     summary: "My first hackathon: nearly 200 students, 24 hours. I built the age and hand-gesture detection behind an in-car media recommender that matched content to trip length with 89% accuracy. Took both the Automotive track and ZF’s problem statement.",
     href: "/projects/road-entertainment-system/",
-  },
-  {
-    id: "medc", kind: "win", label: "Scholarship", title: "$10,000 MEDC Michigan Scholar Award", org: "Michigan Economic Development Corporation", start: "2023", end: "2023",
   },
   {
     id: "ces", kind: "win", label: "Showcase", title: "Gesture controls on stage at CES 2023", org: "Hyundai Mobis", start: "Jan 2023", end: "Jan 2023", location: "Las Vegas, NV",
@@ -383,12 +398,7 @@ export const awards = [
     date: "2021-2025",
     link: null,
   },
-  {
-    title: "$10,000 MEDC Michigan Scholar Award",
-    issuer: "Michigan Economic Development Corporation",
-    date: "2023",
-    link: null,
-  },
+  { title: "Michiganders Scholarship ($5,000, twice)", issuer: "Michigan Economic Development Corporation", date: "Fall 2024 & Summer 2025", link: null },
   {
     title: "Gigs for Pi - Featured on Pi Network GitHub",
     issuer: "Pi Network",
@@ -438,6 +448,6 @@ export const education = [
     period: "October 2021 - September 2025",
     gpa: "3.94",
     details:
-      "Relevant Coursework: AI, Machine Learning, Operating Systems, Cloud Computing, Data Structures & Algorithms, Data Science, Theory of Computation, Object Oriented Programming, Statistics and Data Analysis, Information Retrieval & Data Mining, UI/UX, Cryptography, Digital Systems, Microcomputers, Cybersecurity • Activities: Facility Manager at Rec Center, Volleyball Club, VP at International Club • Honors: Dean's List 2021-2025, UPE CS & KME Math Honor Societies, Hack Dearborn 2023/2025 Winner, $10,000 MEDC Michigan Scholar Award",
+      "Relevant Coursework: AI, Machine Learning, Operating Systems, Cloud Computing, Data Structures & Algorithms, Data Science, Theory of Computation, Object Oriented Programming, Statistics and Data Analysis, Information Retrieval & Data Mining, UI/UX, Cryptography, Digital Systems, Microcomputers, Cybersecurity • Activities: Facility Manager at Rec Center, Volleyball Club, VP at International Club • Honors: Dean's List 2021-2025, UPE CS & KME Math Honor Societies, Hack Dearborn 2023/2025 Winner, Michiganders Scholarship from MEDC ($5,000 in Fall 2024 and Summer 2025)",
   },
 ]
