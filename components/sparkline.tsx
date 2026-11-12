@@ -3,10 +3,11 @@ const HEIGHT = 32
 const PAD = 2
 const MIN_POINTS = 2
 
-/** Tiny trend line; renders nothing when there's no shape to show. */
+/** Tiny trend line. With no shape to show it still reserves its slot, so live data can't shift the layout. */
 export function Sparkline({ points }: { points: number[] }) {
   const max = Math.max(...points, 0)
-  if (points.length < MIN_POINTS || max === 0) return null
+  if (points.length < MIN_POINTS || max === 0) return <div className="sparkline" aria-hidden="true" />
+
   const step = WIDTH / (points.length - 1)
   const y = (v: number) => HEIGHT - PAD - (v / max) * (HEIGHT - 2 * PAD)
   const line = points.map((v, i) => `${(i * step).toFixed(1)},${y(v).toFixed(1)}`).join(" ")

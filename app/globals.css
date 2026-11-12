@@ -210,9 +210,9 @@ button:disabled { cursor: wait; opacity: .65; }
 .activity-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
 .activity-card { position: relative; display: flex; flex-direction: column; gap: 18px; padding: 22px; border: 1px solid var(--border); border-radius: 14px; background: var(--card); transition: border-color .3s var(--ease-soft), transform .3s var(--ease-soft); }
 .activity-card:hover { border-color: var(--primary); transform: translateY(-2px); }
-.activity-card-top { display: flex; justify-content: space-between; align-items: start; gap: 10px; }
+.activity-card-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: start; gap: 8px 10px; }
 .activity-card h3 { font-size: 19px; font-weight: 500; letter-spacing: -.02em; }
-.activity-card h3 a { display: inline-flex; align-items: center; gap: 4px; }
+.activity-card h3 a { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
 .activity-card h3 a::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
 .activity-card h3 a:focus-visible { outline: none; }
 .activity-card:has(a:focus-visible) { outline: 2px solid var(--primary); outline-offset: 3px; }

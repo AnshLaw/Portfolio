@@ -206,3 +206,27 @@ test('hides zero and null stats', async ({ page }) => {
   await expect(thoughtmatch).not.toContainText('Discord installs')
   await expect(page.locator('.activity-stat strong', { hasText: /^0$/ })).toHaveCount(0)
 })
+
+test('live data does not shift the layout after first paint', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 })
+  await page.route(STATS_URL, async route => {
+    await new Promise(resolve => setTimeout(resolve, 1500))
+    await route.fulfill({ json: statsFixture(), headers: { 'access-control-allow-origin': '*' } })
+  })
+  await page.goto('/')
+  await expect(page.locator('.activity-card')).toHaveCount(5)
+  await expect(page.locator('.activity-section')).toBeVisible()
+  await expect(page.locator('.activity-badge')).toContainText('Snapshot')
+  const before = await page.locator('.activity-section').evaluate(element => element.getBoundingClientRect().top + scrollY)
+  await expect(page.locator('.activity-badge')).toContainText('Live')
+  const after = await page.locator('.activity-section').evaluate(element => element.getBoundingClientRect().top + scrollY)
+  expect(after).toBe(before)
+})
+
+test('card titles stay on one line next to the Discord-only tag', async ({ page }) => {
+  await killStats(page)
+  await page.setViewportSize({ width: 800, height: 600 })
+  await page.goto('/')
+  const height = name => page.locator('.activity-card').filter({ hasText: name }).locator('h3').evaluate(element => element.getBoundingClientRect().height)
+  expect(await height('Tic Tac Toe')).toBe(await height('Taboo Party'))
+})
