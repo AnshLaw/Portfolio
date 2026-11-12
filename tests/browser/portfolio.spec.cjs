@@ -1,5 +1,26 @@
 const { test, expect } = require('@playwright/test')
 const SCREENSHOTS = 'test-results'
+const STATS_URL = 'https://stats.132-145-134-25.sslip.io/public.json'
+const windows = allTime => ({ d7: allTime, d30: allTime, allTime })
+const trend = games => Array.from({ length: 30 }, (_, i) => ({ day: `2026-10-${String(i + 1).padStart(2, '0')}`, games: games * (i % 5) }))
+const statsApp = (id, name, games, players, extra = {}) => ({ id, name, discordOnly: false, games: windows(games), players: windows(players), servers: { allTime: 4 }, discordInstalls: 12, trend: trend(games ? 3 : 0), trackingSince: '2026-10-06', ...extra })
+
+function statsFixture() {
+  return {
+    generatedAt: new Date().toISOString(),
+    total: { ...statsApp('all', 'All Activities', 9876, 2345), id: undefined },
+    apps: [
+      statsApp('taboo', 'Taboo Party', 5000, 900),
+      statsApp('thoughtmatch', 'ThoughtMatch', 40, 30, { discordInstalls: null }),
+      statsApp('tictactoe', 'Tic Tac Toe', 2000, 300, { discordOnly: true }),
+      statsApp('guessthedistrict', 'Guess the District', 2836, 1115),
+      statsApp('amalgummy', 'Cosmix', 0, 0, { discordOnly: true, discordInstalls: null, servers: { allTime: 0 }, trackingSince: null }),
+    ],
+  }
+}
+
+const serveStats = page => page.route(STATS_URL, route => route.fulfill({ json: statsFixture(), headers: { 'access-control-allow-origin': '*' } }))
+const killStats = page => page.route(STATS_URL, route => route.abort('failed'))
 
 test('homepage has usable navigation, real images, and a pausable 3D scene', async ({ page }) => {
   const errors = []
@@ -126,4 +147,58 @@ test('experience timeline follows scroll, filters by kind, and jumps from the ru
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
   await page.screenshot({ path: `${SCREENSHOTS}/experience-mobile.png`, fullPage: true })
   expect(errors).toEqual([])
+})
+
+test('headline shows live activity totals', async ({ page }) => {
+  await serveStats(page)
+  await page.goto('/')
+  await page.locator('.impact-section').scrollIntoViewIfNeeded()
+  await expect(page.locator('.impact-section')).toContainText('9.8K')
+  await expect(page.locator('.impact-section')).toContainText('2.3K')
+})
+
+test('headline falls back when the feed is down', async ({ page }) => {
+  const errors = []
+  page.on('pageerror', error => errors.push(error.message))
+  await killStats(page)
+  await page.goto('/')
+  await page.locator('.impact-section').scrollIntoViewIfNeeded()
+  await expect(page.locator('.impact-section')).toContainText('7.5K')
+  await expect(page.locator('.impact-section')).toContainText('1.8K')
+  expect(errors).toEqual([])
+})
+
+test('activities section lists every game', async ({ page }) => {
+  await serveStats(page)
+  await page.goto('/')
+  const cards = page.locator('.activity-card')
+  await expect(cards).toHaveCount(5)
+  await expect(page.locator('.activity-badge')).toContainText('Live')
+  for (const slug of ['taboo-party', 'thoughtmatch', 'tic-tac-toe', 'guess-the-district', 'cosmix']) {
+    await expect(page.locator(`.activity-card a[href="/projects/${slug}/"]`)).toHaveCount(1)
+  }
+  const cosmix = cards.filter({ hasText: 'Cosmix' })
+  await expect(cosmix).toContainText('Just launched')
+  await expect(cosmix.locator('.activity-stat')).toHaveCount(0)
+  await expect(cards.filter({ hasText: 'Taboo Party' }).locator('svg.sparkline')).toHaveCount(1)
+})
+
+test('activities section survives a dead feed', async ({ page }) => {
+  const errors = []
+  page.on('pageerror', error => errors.push(error.message))
+  await killStats(page)
+  await page.goto('/')
+  await expect(page.locator('.activity-card')).toHaveCount(5)
+  await expect(page.locator('.activity-badge')).toContainText('Snapshot')
+  expect(errors).toEqual([])
+})
+
+test('hides zero and null stats', async ({ page }) => {
+  await serveStats(page)
+  await page.goto('/')
+  await expect(page.locator('.activity-badge')).toContainText('Live')
+  const thoughtmatch = page.locator('.activity-card').filter({ hasText: 'ThoughtMatch' })
+  await expect(thoughtmatch.locator('.activity-stat')).toHaveCount(3)
+  await expect(thoughtmatch).not.toContainText('Discord installs')
+  await expect(page.locator('.activity-stat strong', { hasText: /^0$/ })).toHaveCount(0)
 })
