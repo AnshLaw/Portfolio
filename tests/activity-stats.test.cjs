@@ -67,11 +67,12 @@ test('fetchActivityStats resolves null instead of throwing on any failure', asyn
   assert.equal((await lib.fetchActivityStats(good)).apps.length, 5)
 })
 
-test('fallback snapshot matches the production values read on 2026-11-12', () => {
-  assert.equal(FALLBACK_STATS.total.games.allTime, 7546)
-  assert.equal(FALLBACK_STATS.total.players.allTime, 1814)
+test('fallback snapshot matches the public feed read at 2026-11-12 22:15 UTC', () => {
+  assert.equal(FALLBACK_STATS.total.games.allTime, 7682)
+  assert.equal(FALLBACK_STATS.total.players.allTime, 4458)
+  assert.equal(FALLBACK_STATS.apps.find(app => app.id === 'taboo').players.allTime, 2988)
   assert.deepEqual(clone(FALLBACK_STATS.apps.map(app => app.id)), ['taboo', 'thoughtmatch', 'tictactoe', 'guessthedistrict', 'amalgummy'])
-  assert.equal(FALLBACK_STATS.apps.find(app => app.id === 'amalgummy').discordInstalls, null)
+  assert.equal(FALLBACK_STATS.apps.find(app => app.id === 'amalgummy').games.allTime, 12)
   assert.ok(lib.parseActivityStats(FALLBACK_STATS))
   for (const id of Object.keys(lib.APP_SLUGS)) assert.ok(FALLBACK_STATS.apps.some(app => app.id === id), id)
 })
@@ -92,7 +93,7 @@ test('parseActivityStats reads site visits and treats a missing field as unknown
 })
 
 test('fallback carries Taboo Party site visits only', () => {
-  assert.equal(FALLBACK_STATS.apps.find(app => app.id === 'taboo').visits, 71719)
-  assert.equal(FALLBACK_STATS.total.visits, 71719)
+  assert.equal(FALLBACK_STATS.apps.find(app => app.id === 'taboo').visits, 71736)
+  assert.equal(FALLBACK_STATS.total.visits, 71736)
   for (const app of FALLBACK_STATS.apps.filter(app => app.id !== 'taboo')) assert.equal(app.visits, null, app.id)
 })

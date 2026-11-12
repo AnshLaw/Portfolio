@@ -19,6 +19,13 @@ function statsFixture() {
   }
 }
 
+/** Live data with the same visible stats per card as the fallback snapshot, only bigger numbers. */
+function grownSnapshotFixture() {
+  const fixture = statsFixture()
+  fixture.apps[4] = statsApp('amalgummy', 'Cosmix', 20, 15, { discordOnly: true, discordInstalls: 2, servers: { allTime: 0 } })
+  return fixture
+}
+
 const serveStats = page => page.route(STATS_URL, route => route.fulfill({ json: statsFixture(), headers: { 'access-control-allow-origin': '*' } }))
 const killStats = page => page.route(STATS_URL, route => route.abort('failed'))
 
@@ -167,8 +174,8 @@ test('headline falls back when the feed is down', async ({ page }) => {
   await killStats(page)
   await page.goto('/')
   await page.locator('.impact-section').scrollIntoViewIfNeeded()
-  await expect(page.locator('.impact-section')).toContainText('7.5K')
-  await expect(page.locator('.impact-section')).toContainText('1.8K')
+  await expect(page.locator('.impact-section')).toContainText('7.6K')
+  await expect(page.locator('.impact-section')).toContainText('4.4K')
   expect(errors).toEqual([])
 })
 
@@ -211,7 +218,7 @@ test('live data does not shift the layout after first paint', async ({ page }) =
   await page.setViewportSize({ width: 390, height: 844 })
   await page.route(STATS_URL, async route => {
     await new Promise(resolve => setTimeout(resolve, 1500))
-    await route.fulfill({ json: statsFixture(), headers: { 'access-control-allow-origin': '*' } })
+    await route.fulfill({ json: grownSnapshotFixture(), headers: { 'access-control-allow-origin': '*' } })
   })
   await page.goto('/')
   await expect(page.locator('.activity-card')).toHaveCount(5)
