@@ -25,6 +25,7 @@ function updatedAgo(iso: string, now = Date.now()): string {
 /** Zero or unknown numbers are hidden rather than shown as "0". */
 function visibleStats(app: PublicApp): { label: string; value: number }[] {
   const all = [
+    { label: "Site visits", value: app.visits ?? 0 },
     { label: "Games played", value: app.games.allTime },
     { label: "Players", value: app.players.allTime },
     { label: "Servers", value: app.servers.allTime },

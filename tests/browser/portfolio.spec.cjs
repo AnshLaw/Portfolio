@@ -3,14 +3,14 @@ const SCREENSHOTS = 'test-results'
 const STATS_URL = 'https://stats.132-145-134-25.sslip.io/public.json'
 const windows = allTime => ({ d7: allTime, d30: allTime, allTime })
 const trend = games => Array.from({ length: 30 }, (_, i) => ({ day: `2026-10-${String(i + 1).padStart(2, '0')}`, games: games * (i % 5) }))
-const statsApp = (id, name, games, players, extra = {}) => ({ id, name, discordOnly: false, games: windows(games), players: windows(players), servers: { allTime: 4 }, discordInstalls: 12, trend: trend(games ? 3 : 0), trackingSince: '2026-10-06', ...extra })
+const statsApp = (id, name, games, players, extra = {}) => ({ id, name, discordOnly: false, games: windows(games), players: windows(players), servers: { allTime: 4 }, discordInstalls: 12, trend: trend(games ? 3 : 0), trackingSince: '2026-10-06', visits: null, ...extra })
 
 function statsFixture() {
   return {
     generatedAt: new Date().toISOString(),
     total: { ...statsApp('all', 'All Activities', 9876, 2345), id: undefined },
     apps: [
-      statsApp('taboo', 'Taboo Party', 5000, 900),
+      statsApp('taboo', 'Taboo Party', 5000, 900, { visits: 80000 }),
       statsApp('thoughtmatch', 'ThoughtMatch', 40, 30, { discordInstalls: null }),
       statsApp('tictactoe', 'Tic Tac Toe', 2000, 300, { discordOnly: true }),
       statsApp('guessthedistrict', 'Guess the District', 2836, 1115),
@@ -229,4 +229,14 @@ test('card titles stay on one line next to the Discord-only tag', async ({ page 
   await page.goto('/')
   const height = name => page.locator('.activity-card').filter({ hasText: name }).locator('h3').evaluate(element => element.getBoundingClientRect().height)
   expect(await height('Tic Tac Toe')).toBe(await height('Taboo Party'))
+})
+
+test('Taboo Party card shows site visits from its own counter', async ({ page }) => {
+  await serveStats(page)
+  await page.goto('/')
+  await expect(page.locator('.activity-badge')).toContainText('Live')
+  const taboo = page.locator('.activity-card').filter({ hasText: 'Taboo Party' })
+  await expect(taboo.locator('.activity-stat').first()).toContainText('Site visits')
+  await expect(taboo.locator('.activity-stat').first()).toContainText('80K')
+  await expect(page.locator('.activity-card').filter({ hasText: 'ThoughtMatch' })).not.toContainText('Site visits')
 })

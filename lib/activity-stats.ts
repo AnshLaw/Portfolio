@@ -8,6 +8,8 @@ export type PublicWindows = { d7: number; d30: number; allTime: number }
 export type PublicTotals = {
   name: string; games: PublicWindows; players: PublicWindows; servers: { allTime: number }
   discordInstalls: number | null; trend: { day: string; games: number }[]; trackingSince: string | null
+  /** Site visits; only games with their own visit counter (Taboo Party) report one. */
+  visits: number | null
 }
 export type PublicApp = PublicTotals & { id: AppId; discordOnly: boolean }
 export type PublicStats = { generatedAt: string; total: PublicTotals; apps: PublicApp[] }
@@ -42,7 +44,11 @@ function isTotals(v: unknown): v is PublicTotals {
     && isObj(v.servers) && isCount(v.servers.allTime)
     && (v.discordInstalls === null || isCount(v.discordInstalls)) && isTrend(v.trend)
     && (v.trackingSince === null || typeof v.trackingSince === "string")
+    && (v.visits === undefined || v.visits === null || isCount(v.visits))
 }
+
+/** Feeds from before visits existed omit the field; treat that as unknown. */
+const withVisits = <T extends PublicTotals>(t: T): T => ({ ...t, visits: t.visits ?? null })
 
 const isKnownApp = (v: unknown): v is Obj & { id: AppId } => isObj(v) && typeof v.id === "string" && v.id in APP_SLUGS
 
@@ -51,7 +57,7 @@ export function parseActivityStats(json: unknown): PublicStats | null {
   if (!isObj(json) || typeof json.generatedAt !== "string" || !isTotals(json.total) || !Array.isArray(json.apps)) return null
   const known = json.apps.filter(isKnownApp)
   if (!known.every(app => isTotals(app) && typeof app.discordOnly === "boolean")) return null
-  return { generatedAt: json.generatedAt, total: json.total, apps: known as unknown as PublicApp[] }
+  return { generatedAt: json.generatedAt, total: withVisits(json.total), apps: (known as unknown as PublicApp[]).map(withVisits) }
 }
 
 export function mergeStats(fallback: PublicStats, live: PublicStats | null): PublicStats {

@@ -39,10 +39,10 @@ export const projects: Project[] = [
 {
   "slug": "taboo-party",
   "title": "Taboo Party",
-  "summary": "A real-time team word game in the browser and as an official Discord Activity. 4,700+ games tracked since Oct 2026.",
+  "summary": "A real-time team word game in the browser and as an official Discord Activity. 71,000+ site visits and 4,700+ games tracked since Oct 2026.",
   "problem": "Playing a word game remotely should feel as immediate and social as being in the same room.",
   "solution": "Built and deployed a multiplayer game with Next.js, React, TypeScript, and Socket.IO, integrated as an official Discord Activity. Players join rooms, form teams, and play timed rounds together.",
-  "impact": "4,700+ games and 370+ players tracked since Oct 2026, installed in 16 Discord servers, with a 100+ member community server.",
+  "impact": "71,000+ site visits, plus 4,700+ games and 370+ players tracked since Oct 2026. Installed in 16 Discord servers, with a 100+ member community server.",
   "tech": [
     "Next.js",
     "TypeScript",
@@ -54,6 +54,7 @@ export const projects: Project[] = [
     "Discord Activities"
   ],
   "highlights": [
+    "71,000+ site visits",
     "4,700+ games tracked since Oct 2026",
     "Discord in-app purchases and Stripe billing",
     "Self-serve ad marketplace with image moderation",
