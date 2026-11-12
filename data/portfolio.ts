@@ -5,7 +5,7 @@ export const profile = {
   graduationDate: "September 2025",
   aboutShort: "Software Engineer at General Motors. Building applied AI, real-time systems, and products people use.",
   aboutLong:
-    "Software Engineer at General Motors, deploying computer vision across manufacturing operations. Previously an AI/ML Engineer at Hyundai Mobis, building agentic RAG, edge AI, and in-cabin gesture recognition systems. I graduated from Kettering University with a B.S. in Computer Science, an AI concentration, an Applied Mathematics minor, and a 3.94 GPA. Outside work, I build products like Taboo Party and compete at hackathons, including wins at Hack Dearborn in 2023 and 2025.",
+    "Software Engineer at General Motors, deploying computer vision across manufacturing operations. Previously an AI/ML Engineer at Hyundai Mobis, building agentic RAG, edge AI, and in-cabin gesture recognition systems. I graduated from Kettering University with a B.S. in Computer Science, an AI concentration, an Applied Mathematics minor, and a 3.94 GPA. Outside work, I build and run five Discord Activities, including Taboo Party, and compete at hackathons, including wins at Hack Dearborn in 2023 and 2025.",
   email: "anshraj65@gmail.com",
   resumeUrl: "/Ansh_Raj_Suryavanshi_Software_Engineer_Resume.pdf",
   avatarUrl: "/ansh.jpg",
@@ -39,20 +39,24 @@ export const projects: Project[] = [
 {
   "slug": "taboo-party",
   "title": "Taboo Party",
-  "summary": "A real-time multiplayer word game, built for the browser and Discord. 52,000+ visits and 800+ registered players.",
+  "summary": "A real-time team word game in the browser and as an official Discord Activity. 4,700+ games tracked since Oct 2026.",
   "problem": "Playing a word game remotely should feel as immediate and social as being in the same room.",
   "solution": "Built and deployed a multiplayer game with Next.js, React, TypeScript, and Socket.IO, integrated as an official Discord Activity. Players join rooms, form teams, and play timed rounds together.",
-  "impact": "52,000+ visits, 800+ registered users, and a community of 100+ Discord server members.",
+  "impact": "4,700+ games and 370+ players tracked since Oct 2026, installed in 16 Discord servers, with a 100+ member community server.",
   "tech": [
     "Next.js",
     "TypeScript",
     "React",
     "Socket.IO",
+    "Express",
+    "Supabase",
+    "Stripe",
     "Discord Activities"
   ],
   "highlights": [
-    "52,000+ visits",
-    "800+ registered users",
+    "4,700+ games tracked since Oct 2026",
+    "Discord in-app purchases and Stripe billing",
+    "Self-serve ad marketplace with image moderation",
     "Official Discord Activity",
     "100+ community members"
   ],
@@ -61,13 +65,14 @@ export const projects: Project[] = [
   "images": [
     {
       "src": "/projects/taboo-party.jpg",
-      "alt": "Taboo Party multiplayer word game homepage"
+      "alt": "Taboo Party cover art with word cards and team scores"
     }
   ],
   "tags": [
     "web",
     "real-time",
-    "games"
+    "games",
+    "discord"
   ],
   "period": "Dec 2025 - Present",
   "sourceLabel": "Private source",
@@ -265,6 +270,92 @@ export const projects: Project[] = [
       {"src": "/projects/songchat.jpg", "alt": "SongChat music-based social platform homepage"},
     ],
     tags: ["web", "social", "music", "real-time"],
+  },
+  {
+    slug: "thoughtmatch",
+    title: "ThoughtMatch - Party Word Game",
+    period: "Oct 2026 - Present",
+    summary: "An online party word game for 3-12 players in the browser and as a Discord Activity: think the same word as your friends before the Dener stops you.",
+    problem: "Guessing games like Contact fall apart online: secret words leak, timing windows feel unfair, and one dropped connection ends the round.",
+    solution: "Built a TypeScript monorepo with a pure game engine, a Socket.IO server, and a React client. The server owns all state and sends each player only what they are allowed to see.",
+    impact: "Live on the web and in Discord, with paid word packs through Discord SKUs and Stripe.",
+    tech: ["TypeScript", "React", "Vite", "Socket.IO", "Node.js", "zod", "Stripe", "Discord Activities"],
+    highlights: [
+      "Server-authoritative engine with per-player views that hide secret words",
+      "Room state snapshotted to disk and restored across restarts",
+      "Per-IP and per-socket rate limits",
+      "Paid word packs through Discord SKUs and Stripe",
+    ],
+    repoUrl: null,
+    liveUrl: "https://thoughtmatch.online",
+    sourceLabel: "Private source",
+    images: [{ src: "/projects/thoughtmatch.jpg", alt: "ThoughtMatch cover art with a game table and clue cards" }],
+    tags: ["games", "real-time", "discord", "web"],
+  },
+  {
+    slug: "guess-the-district",
+    title: "Guess the District (ZILA?)",
+    period: "Oct 2026 - Present",
+    summary: "A bilingual English and Hindi geography game: read sourced clues about one of India's 784 districts, then name it by search or on the map.",
+    problem: "Geography quizzes are easy to cheat when the answer ships to the browser, and a daily puzzle is spoiled if anyone can predict it.",
+    solution: "Built a static Next.js PWA with MapLibre and a Hono API on Node. The client never sees the answer or unrevealed clues; daily picks come from a keyed HMAC.",
+    impact: "1,600+ games and 1,200+ players since Nov 2026, with a daily mystery, practice, and friend battles on the web, as a PWA, and in Discord.",
+    tech: ["Next.js", "TypeScript", "MapLibre GL", "Hono", "Redis", "PostgreSQL", "Supabase", "Playwright"],
+    highlights: [
+      "784 districts with sourced clues in English and Hindi",
+      "Atomic Redis compare-and-set per guess, results written in one Postgres transaction",
+      "HMAC-keyed daily picks that can't be predicted from public code",
+      "Content linter that blocks clues leaking the answer",
+    ],
+    repoUrl: null,
+    liveUrl: "https://guessthedistrict.in",
+    sourceLabel: "Private source",
+    images: [{ src: "/projects/guess-the-district.jpg", alt: "Guess the District round with a clue card and a district map of India" }],
+    tags: ["games", "discord", "web", "education"],
+  },
+  {
+    slug: "tic-tac-toe",
+    title: "Tic Tac Toe - Discord Activity",
+    period: "Nov 2026 - Present",
+    summary: "Tic-tac-toe inside Discord voice calls: 1v1 games side by side, spectating, knockout tournaments, and a computer opponent on three levels.",
+    problem: "A voice call full of people needs more than one board: friends want to play at the same time, watch, and settle it in a bracket.",
+    solution: "Built a React and Socket.IO Activity with shared rules in one package, rooms scoped to each Discord instance, and a minimax opponent.",
+    impact: "1,000+ games across 23 Discord servers in its first week.",
+    tech: ["TypeScript", "React", "Vite", "Socket.IO", "zod", "Discord Embedded App SDK"],
+    highlights: [
+      "Minimax AI on Easy, Medium, and Hard",
+      "Knockout tournament brackets and best-of series",
+      "Rooms scoped per Discord instance with rate and IP limits",
+      "Health-checked deploys with automatic rollback",
+    ],
+    repoUrl: null,
+    liveUrl: null,
+    sourceLabel: "Private source",
+    links: [{ label: "Add to Discord", url: "https://discord.com/oauth2/authorize?client_id=1270915316787970069" }],
+    images: [{ src: "/projects/tic-tac-toe.jpg", alt: "Tic Tac Toe board with a winning diagonal" }],
+    tags: ["games", "real-time", "discord"],
+  },
+  {
+    slug: "cosmix",
+    title: "Cosmix - Astrology Matching Activity",
+    period: "Nov 2026 - Present",
+    summary: "A Discord Activity hosted by Zodie the star: build a birth-chart profile, Blend with people in your voice channel, and run Room shows.",
+    problem: "Astrology apps are solo experiences; the fun is comparing charts with friends, live, in the same call.",
+    solution: "Built a deterministic astrology engine on astronomy-engine, a Fastify and Socket.IO server on Postgres, and LLM-written readings through a fallback chain of providers.",
+    impact: "Launched in November 2026 as a free Discord Activity.",
+    tech: ["TypeScript", "React", "Fastify", "Socket.IO", "PostgreSQL", "astronomy-engine", "LLMs"],
+    highlights: [
+      "LLM fallback chain (Groq, Cloudflare AI, Gemini, local Gemma) with a quota ledger",
+      "Prompt anonymization and output leak scanning",
+      "Field-level envelope encryption with key rotation",
+      "Age gate, consent, and entitlements built in",
+    ],
+    repoUrl: null,
+    liveUrl: null,
+    sourceLabel: "Private source",
+    links: [{ label: "Add to Discord", url: "https://discord.com/oauth2/authorize?client_id=1570242472401961101" }],
+    images: [{ src: "/projects/cosmix.jpg", alt: "Cosmix cover art with Zodie the star and Blend bubbles" }],
+    tags: ["games", "discord", "ai", "llm"],
   }
 ]
 
@@ -301,12 +392,28 @@ export type Milestone = {
 /** Everything on the experience timeline, newest start first. */
 export const milestones: Milestone[] = [
   {
+    id: "tic-tac-toe", kind: "project", label: "Side project · Discord Activity", title: "Tic Tac Toe", org: "Discord", start: "Nov 2026", end: "Present",
+    summary: "1v1 games, spectating, tournaments, and a minimax opponent inside Discord voice calls.", href: "/projects/tic-tac-toe/",
+  },
+  {
+    id: "cosmix", kind: "project", label: "Side project · Discord Activity", title: "Cosmix", org: "Discord", start: "Nov 2026", end: "Present",
+    summary: "Astrology matching for voice channels, with a deterministic chart engine and LLM-written readings.", href: "/projects/cosmix/",
+  },
+  {
+    id: "guess-the-district", kind: "project", label: "Side project", title: "Guess the District", org: "guessthedistrict.in", start: "Oct 2026", end: "Present",
+    summary: "Bilingual geography game over India's 784 districts, on the web and in Discord.", href: "/projects/guess-the-district/",
+  },
+  {
+    id: "thoughtmatch", kind: "project", label: "Side project", title: "ThoughtMatch", org: "thoughtmatch.online", start: "Oct 2026", end: "Present",
+    summary: "Party word game for 3-12 players with a server-authoritative engine, on the web and in Discord.", href: "/projects/thoughtmatch/",
+  },
+  {
     id: "gm", kind: "work", label: "Role", title: "Software Engineer", org: "General Motors", start: "Mar 2026", end: "Present", location: "Flint, MI",
     bullets: experience[0].bullets,
   },
   {
     id: "taboo", kind: "project", label: "Side project · Founder", title: "Taboo Party", org: "tabooparty.online", start: "Dec 2025", end: "Present",
-    summary: "A real-time multiplayer word game in the browser and as an official Discord Activity. Next.js, TypeScript, and Socket.IO. 52,000+ visits, 800+ registered users, and a 100+ member community server.",
+    summary: "A real-time multiplayer word game in the browser and as an official Discord Activity. Next.js, TypeScript, and Socket.IO. 4,700+ games tracked since Oct 2026 and a 100+ member community server.",
     href: "/projects/taboo-party/",
   },
   {
@@ -408,8 +515,9 @@ export const awards = [
 ]
 
 export const activities = [
+  { icon: "Code", title: "Shipped four new Discord Activities", description: "ThoughtMatch, Guess the District, Tic Tac Toe, and Cosmix, on one self-hosted server with a live stats service.", date: "Nov 2026", type: "contribution" },
   { icon: "Briefcase", title: "Software Engineer at General Motors", description: "Deploying 72 AI cameras across 38 conveyors and accelerating camera onboarding across 7 plants.", date: "Mar 2026", type: "experience" },
-  { icon: "Code", title: "Launched Taboo Party", description: "Real-time multiplayer in the browser and Discord. 52,000+ visits and 800+ registered users.", date: "Dec 2025", type: "contribution" },
+  { icon: "Code", title: "Launched Taboo Party", description: "Real-time multiplayer in the browser and Discord. 4,700+ games tracked since Oct 2026.", date: "Dec 2025", type: "contribution" },
   { icon: "Trophy", title: "Won Hack Dearborn 2025 with Givvy", description: "AES-encrypted NFC e-ink gift cards with web and point-of-sale apps.", date: "Oct 2025", type: "achievement" },
   {
     icon: "Trophy",

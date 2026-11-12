@@ -2,6 +2,7 @@ import { PageLayout } from "@/components/page-layout"
 import { HeroSection } from "@/components/hero-section"
 import { TechMarquee } from "@/components/tech-marquee"
 import { FeaturedProjects } from "@/components/featured-projects"
+import { ActivityShowcase } from "@/components/activity-showcase"
 import { QuickStats } from "@/components/quick-stats"
 import { LatestActivity } from "@/components/latest-activity"
 
@@ -12,6 +13,7 @@ export default function HomePage() {
       <TechMarquee />
       <FeaturedProjects />
       <QuickStats />
+      <ActivityShowcase />
       <LatestActivity />
     </PageLayout>
   )

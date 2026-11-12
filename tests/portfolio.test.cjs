@@ -130,3 +130,23 @@ test('scholarship is two awards and every project with dates is on the timeline'
     assert.ok(milestones.some(item => item.href === `/projects/${slug}/`), slug)
   }
 })
+
+test('every Discord Activity has a project page with an image', () => {
+  const { projects } = readModule('data/portfolio.ts')
+  const { APP_SLUGS } = readModule('lib/activity-stats.ts')
+  for (const slug of Object.values(APP_SLUGS)) {
+    const project = projects.find(item => item.slug === slug)
+    assert.ok(project, slug)
+    assert.ok(project.tags.includes('games'), `${slug} tagged games`)
+    assert.ok(project.tags.includes('discord'), `${slug} tagged discord`)
+    assert.ok(fs.existsSync(`public${project.images[0].src}`), `${slug} image`)
+  }
+})
+
+test('no stale visit or registration claims remain', () => {
+  const files = ['data/portfolio.ts', 'components/quick-stats.tsx', 'components/featured-projects.tsx', 'components/hero-section.tsx', 'components/field-scene.tsx']
+  for (const file of files) {
+    const source = fs.readFileSync(file, 'utf8')
+    for (const stale of ['52K', '52,000', '800+', '52,000+']) assert.ok(!source.includes(stale), `${file} still says ${stale}`)
+  }
+})
