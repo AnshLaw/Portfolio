@@ -59,7 +59,7 @@ test('mobile navigation and layout fit the viewport', async ({ page }) => {
 
 test('project filters are keyboard-accessible and recover from no results', async ({ page }) => {
   await page.goto('/projects/')
-  await expect(page.locator('.project-card')).toHaveCount(8)
+  await expect(page.locator('.project-card')).toHaveCount(12)
   await page.getByRole('textbox', { name: 'Search projects' }).fill('Taboo')
   await expect(page.locator('.project-card')).toHaveCount(1)
   await expect(page.getByRole('link', { name: 'Play on Discord' })).toHaveAttribute('href', 'https://discord.com/discovery/applications/1468756639938252891')
@@ -69,6 +69,10 @@ test('project filters are keyboard-accessible and recover from no results', asyn
   await page.getByRole('button', { name: 'hackathon', exact: true }).focus()
   await page.keyboard.press('Enter')
   await expect(page.locator('.project-card')).toHaveCount(2)
+
+  await page.getByRole('button', { name: 'Clear all', exact: true }).click()
+  await page.getByRole('button', { name: 'discord', exact: true }).click()
+  await expect(page.locator('.project-card')).toHaveCount(5)
 })
 
 async function fillContact(page) {

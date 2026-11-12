@@ -4,8 +4,9 @@ const fs = require('node:fs/promises')
 const VIEWPORT = { width: 1440, height: 900 }
 const SCREENSHOT_QUALITY = 88
 const LOAD_TIMEOUT_MS = 45_000
+// Taboo Party, ThoughtMatch, Cosmix and Guess the District use their own cover art or product screenshots;
+// Tic Tac Toe has a generated card. Recapturing their live sites would pull in ads and banners.
 const liveProjects = [
-  ['taboo-party', 'https://tabooparty.online'],
   ['rec-it-app', 'https://kurecit.netlify.app/signin'],
   ['gigs-for-pi', 'https://gigsforpilive.netlify.app'],
   ['songchat', 'https://songchat.online'],
@@ -15,10 +16,6 @@ async function captureLive(browser, slug, url) {
   const page = await browser.newPage({ viewport: VIEWPORT, reducedMotion: 'reduce' })
   try {
     await page.goto(url, { waitUntil: 'networkidle', timeout: LOAD_TIMEOUT_MS })
-    if (slug === 'taboo-party' && await page.getByRole('button', { name: 'Yes', exact: true }).isVisible()) {
-      await page.getByRole('button', { name: 'Yes', exact: true }).click()
-      await page.getByRole('heading', { name: /taboo/i }).first().waitFor()
-    }
     await page.screenshot({ path: `public/projects/${slug}.jpg`, type: 'jpeg', quality: SCREENSHOT_QUALITY })
     console.log(`Captured ${slug}: ${await page.title()}`)
   } finally { await page.close() }
