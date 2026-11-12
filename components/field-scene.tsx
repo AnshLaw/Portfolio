@@ -14,7 +14,7 @@ const MOBILE_WIDTH = 640
 const SCENES: { id: SceneId; tab: string; where: string; title: string; detail: string }[] = [
   { id: "conveyor", tab: "GM Flint", where: "General Motors · now", title: "72 cameras watching 38 conveyor lines", detail: "Real-time vision on the plant floor, plus the pipeline that cut camera setup from weeks to days." },
   { id: "cabin", tab: "Hyundai cabin", where: "Hyundai Mobis · 2022–25", title: "Gestures and a language model, inside the car", detail: "Gesture controls shown at CES 2023. An on-device LLM with 35% lower latency, driving real-time voice alerts." },
-  { id: "cards", tab: "Taboo Party", where: "Side project · Dec 2025", title: "Taboo, rebuilt for Discord and the browser", detail: "One word to guess, five you can’t say. 4,700+ games played since Oct 2026." },
+  { id: "cards", tab: "Taboo Party", where: "Side project · Dec 2025", title: "Taboo, rebuilt for Discord and the browser", detail: "One word to guess, five you can’t say. 71,000+ site visits and 4,700+ games played." },
 ]
 
 function subscribeToMotionPreference(callback: () => void) {

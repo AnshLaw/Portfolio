@@ -75,3 +75,24 @@ test('fallback snapshot matches the production values read on 2026-11-12', () =>
   assert.ok(lib.parseActivityStats(FALLBACK_STATS))
   for (const id of Object.keys(lib.APP_SLUGS)) assert.ok(FALLBACK_STATS.apps.some(app => app.id === id), id)
 })
+
+test('parseActivityStats reads site visits and treats a missing field as unknown', () => {
+  const feed = clone(FALLBACK_STATS)
+  feed.apps[0].visits = 80000
+  assert.equal(lib.parseActivityStats(feed).apps[0].visits, 80000)
+  for (const app of feed.apps) delete app.visits
+  delete feed.total.visits
+  const legacy = lib.parseActivityStats(feed)
+  assert.ok(legacy)
+  assert.equal(legacy.apps[0].visits, null)
+  assert.equal(legacy.total.visits, null)
+  const negative = clone(FALLBACK_STATS)
+  negative.apps[0].visits = -1
+  assert.equal(lib.parseActivityStats(negative), null)
+})
+
+test('fallback carries Taboo Party site visits only', () => {
+  assert.equal(FALLBACK_STATS.apps.find(app => app.id === 'taboo').visits, 71719)
+  assert.equal(FALLBACK_STATS.total.visits, 71719)
+  for (const app of FALLBACK_STATS.apps.filter(app => app.id !== 'taboo')) assert.equal(app.visits, null, app.id)
+})
