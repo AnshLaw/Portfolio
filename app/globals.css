@@ -199,7 +199,7 @@ button:disabled { cursor: wait; opacity: .65; }
 .impact-section { display: grid; grid-template-columns: repeat(4,1fr); margin-block: 65px 30px; padding-block: 42px; border-block: 1px solid var(--border); }
 .impact-section > div { padding: 0 25px; border-left: 1px solid var(--border); }
 .impact-section > div:first-child { border: 0; padding-left: 0; }
-.impact-section strong { font-size: 48px; letter-spacing: -.05em; color: var(--ice); font-weight: 400; }
+.impact-section strong { font-size: 48px; letter-spacing: -.05em; color: var(--ice); font-weight: 400; font-variant-numeric: tabular-nums; }
 .impact-section h2 { font-size: 12px; margin-top: 7px; }
 .impact-section p { font-size: 10px; color: var(--muted-foreground); line-height: 1.7; margin-top: 8px; }
 .activity-section { padding-block: 70px 110px; }
